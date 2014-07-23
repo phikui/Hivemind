@@ -11,7 +11,7 @@ public class ReadExecute {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Executable x = ScriptCompiler.readFromFile("test.rb");
+		Executable x = ScriptCompiler.readFromFile("./scripts/test.rb");
 		x.boxed_execute();
 	}
 

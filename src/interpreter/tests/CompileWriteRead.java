@@ -16,12 +16,12 @@ public class CompileWriteRead {
 	 */
 	public static void main(String[] args) throws ParseException, IOException, ClassNotFoundException {
 
-		Executable x = ScriptCompiler.compile("test.rs");
+		Executable x = ScriptCompiler.compile("./scripts/test.rs");
 		x.boxed_execute();
 
-		ScriptCompiler.savetoFile("test.rb", x);
+		ScriptCompiler.savetoFile("./scripts/test.rb", x);
 
-		Executable x2 = ScriptCompiler.readFromFile("test.rb");
+		Executable x2 = ScriptCompiler.readFromFile("./scripts/test.rb");
 		x2.boxed_execute();
 
 	}

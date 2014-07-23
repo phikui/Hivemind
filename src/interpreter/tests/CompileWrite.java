@@ -9,7 +9,7 @@ public class CompileWrite {
 	 */
 	public static void main(String[] args) {
 
-		ScriptCompiler.savetoFile("test.rb", ScriptCompiler.compile("./test.rs"));
+		ScriptCompiler.savetoFile("./scripts/test.rb", ScriptCompiler.compile("./scripts/test.rs"));
 		System.out.println("saved");
 	}
 

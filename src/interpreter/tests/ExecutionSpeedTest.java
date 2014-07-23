@@ -10,7 +10,7 @@ public class ExecutionSpeedTest {
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		Executable prog = ScriptCompiler.compile("./speed.txt");
+		Executable prog = ScriptCompiler.compile("./scripts/speed.txt");
 		double java, script, start, finish;
 
 		// program start
