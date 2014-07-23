@@ -1,10 +1,10 @@
 package interpreter.rules.variables;
 
-import interpreter.rules.Expression;
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.SyntaxException;
 import interpreter.exceptions.ValidExit;
-import interpreter.executer.VariableMapGenerator;
+import interpreter.parser.VariableNames;
+import interpreter.rules.Expression;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Variable implements Expression {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String m_name;
-	private static Set<String> illegals = VariableMapGenerator.getIllegalVariableNames();
+	private static Set<String> illegals = VariableNames.getIllegalVariableNames();
 
 	public Variable(String name) throws SyntaxException{
 		m_name = name;

@@ -3,7 +3,7 @@ package interpreter.rules.variables;
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.SyntaxException;
 import interpreter.exceptions.ValidExit;
-import interpreter.executer.VariableMapGenerator;
+import interpreter.parser.VariableNames;
 import interpreter.rules.Expression;
 import interpreter.rules.Number;
 
@@ -19,7 +19,7 @@ public class Assignment implements Expression {
 	private static final long serialVersionUID = 1L;
 	protected String m_variable_name;
 	private Expression m_value;
-	private static Set<String> illegal_assignments = VariableMapGenerator.getIllegalAssignments();
+	private static Set<String> illegal_assignments = VariableNames.getIllegalAssignments();
 
 	public Assignment(String variable_name, Expression value) throws SyntaxException {
 		if (isIllegal(variable_name)) {
