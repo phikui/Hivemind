@@ -11,6 +11,11 @@ import java.util.HashMap;
 //only assigns a value if variable has none
 public class OneTimeAssignment extends Assignment {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public OneTimeAssignment(String variable_name, Expression value) throws SyntaxException {
 		super(variable_name, value);
 

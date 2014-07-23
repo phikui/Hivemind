@@ -11,7 +11,9 @@ public class Executable implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1765382970338982324L;
+	private static final long serialVersionUID = 1L;
+	
+	
 	private static final long maxExecutionTime = 10 * 1000;
 	private static final long maxVariableMapSize = 100;
 

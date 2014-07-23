@@ -8,6 +8,11 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class DeleteVariable extends VariableFunction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DeleteVariable(Variable value) throws SyntaxException {
 		super(value);
 		if (Assignment.isIllegal(value.getName())) {

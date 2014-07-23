@@ -6,6 +6,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Number implements Expression {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double m_number;
 
 	public Number(double number) {

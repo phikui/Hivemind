@@ -7,6 +7,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Print implements Expression{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Expression m_msg;
 	
 	public Print (Expression msg){

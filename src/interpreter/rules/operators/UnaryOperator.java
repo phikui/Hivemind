@@ -9,6 +9,10 @@ import java.util.HashMap;
 
 public class UnaryOperator implements Expression {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String m_operator;
 	public Expression m_value;
 

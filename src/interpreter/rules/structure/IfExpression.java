@@ -8,6 +8,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class IfExpression implements Expression {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Expression m_true_case, m_false_case, m_condition;
 
 	public IfExpression(Expression condition, Expression true_case, Expression false_case) {

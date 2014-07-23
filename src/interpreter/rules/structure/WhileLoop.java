@@ -8,6 +8,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class WhileLoop implements Expression {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Expression m_body, m_condition;
 
 	public WhileLoop(Expression condition, Expression body) {

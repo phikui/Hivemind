@@ -9,6 +9,10 @@ import java.util.HashMap;
 
 public class Loop implements Expression {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Expression m_body, m_count;
 
 	public Loop(Expression count, Expression body) {

@@ -13,6 +13,10 @@ import java.util.Set;
 
 public class Assignment implements Expression {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String m_variable_name;
 	private Expression m_value;
 	private static Set<String> illegal_assignments = VariableMapGenerator.getIllegalAssignments();

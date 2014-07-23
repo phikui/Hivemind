@@ -10,6 +10,11 @@ public class ValueCheck extends VariableFunction {
 
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ValueCheck(Variable value) {
 		super(value);
 	}

@@ -20,6 +20,7 @@ public class ExecutionSpeedTest {
 		for (int i = 0; i < max; i++) {
 			for (int j = 0; j < max; j++) {
 
+				@SuppressWarnings("unused")
 				double z = Math.pow(Math.random(), Math.random());
 				// System.out.println(z);
 			}

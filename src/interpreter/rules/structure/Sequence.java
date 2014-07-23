@@ -9,6 +9,10 @@ import java.util.HashMap;
 
 public class Sequence implements Expression {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Expression m_a, m_b;
 
 	public Sequence(Expression a, Expression b) {

@@ -1,7 +1,6 @@
 package interpreter.parser;
 
 import interpreter.exceptions.ParsingException;
-import interpreter.exceptions.SyntaxException;
 import interpreter.executer.Executable;
 
 import java.io.File;
@@ -11,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.text.ParseException;
-
 import org.apache.commons.io.FileUtils;
 
 public class ScriptCompiler {
@@ -58,19 +55,25 @@ public class ScriptCompiler {
 
 	// uses the saved path of source file for saving location. Only use if sure
 	// which value this has
-	public static void savetoFile(Executable x) {
+	public static boolean savetoFile(Executable x) {
+
 		if (!x.getSourceFile().equals("NONE_DEFINED")) {
 			String path = x.getSourceFile().replaceAll(".rs", "");
 			path = path + ".rb";
-			savetoFile(path, x);
+			if (savetoFile(path, x)) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			System.err.println("No file name");
 		}
+		return false;
 	}
 
 	// save Executable to the given location, and Encrypt it with DES for
 	// security;
-	public static void savetoFile(String path, Executable x) {
+	public static boolean savetoFile(String path, Executable x) {
 		String tmp = path + ".tmp";
 		FileOutputStream fileOut;
 		try {
@@ -84,15 +87,16 @@ public class ScriptCompiler {
 			// TODO Auto-generated catch block
 			new File(tmp).delete();
 			e.printStackTrace();
-			return;
+			return false;
 		} catch (IOException e) {
 			new File(tmp).delete();
 			e.printStackTrace();
-			return;
+			return false;
 		}
 
 		DESCipher.encrypt_file(key, tmp, path);
 		new File(tmp).delete();
+		return true;
 	}
 
 	// read from file and decrypt with DES

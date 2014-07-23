@@ -2,7 +2,7 @@ package interpreter.executer;
 
 import interpreter.rules.Expression;
 import interpreter.rules.Number;
-import interpreter.rules.unused.RandomNumber;
+import interpreter.rules.RandomNumber;
 
 import java.util.HashMap;
 import java.util.HashSet;
