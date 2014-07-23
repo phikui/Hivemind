@@ -52,7 +52,7 @@ public class Parser {
 		result = result.replaceAll("=", " = ");
 		result = result.replaceAll("!", " ! ");
 		result = result.replaceAll("\\?", " ? ");
-		result = result.replaceAll("§", " § ");
+		result = result.replaceAll("ï¿½", " ï¿½ ");
 		result = result.replaceAll("\\(", " ( ");
 		result = result.replaceAll("\\)", " ) ");
 
@@ -150,7 +150,7 @@ public class Parser {
 
 				}
 				// special variable operators
-			} else if (token.equals(".exists") || token.equals(".exists")) {
+			} else if (token.equals(".exists") || token.equals(".delete")) {
 				if (previous == null) {
 					throw new SyntaxException("Expected operand for " + token);
 				}

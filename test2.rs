@@ -1,1 +1,1 @@
-print test.exists;
+print test;
