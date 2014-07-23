@@ -1,6 +1,6 @@
 package interpreter.tests;
 
-import interpreter.parser.Executable;
+import interpreter.executer.Executable;
 import interpreter.parser.ScriptCompiler;
 
 public class ExecutionSpeedTest {

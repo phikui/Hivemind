@@ -2,6 +2,7 @@ package interpreter.parser;
 
 import interpreter.exceptions.ParsingException;
 import interpreter.exceptions.SyntaxException;
+import interpreter.executer.Executable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
+
 import org.apache.commons.io.FileUtils;
 
 public class ScriptCompiler {
@@ -89,7 +91,7 @@ public class ScriptCompiler {
 			return;
 		}
 
-		DESCypher.encrypt_file(key, tmp, path);
+		DESCipher.encrypt_file(key, tmp, path);
 		new File(tmp).delete();
 	}
 
@@ -97,7 +99,7 @@ public class ScriptCompiler {
 	public static Executable readFromFile(String path) {
 		// TODO check validity of Object
 		String tmp = path + ".tmp";
-		DESCypher.decrypt_file(key, path, tmp);
+		DESCipher.decrypt_file(key, path, tmp);
 		try {
 			FileInputStream fileIn = new FileInputStream(tmp);
 			ObjectInputStream in = new ObjectInputStream(fileIn);

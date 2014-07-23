@@ -13,7 +13,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-public class DESCypher {
+public class DESCipher {
 
 	public static void encrypt_file(String passphrase, String file_path, String encrypted_file_path) {
 		try {

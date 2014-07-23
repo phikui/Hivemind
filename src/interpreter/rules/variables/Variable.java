@@ -1,10 +1,10 @@
 package interpreter.rules.variables;
 
-import interpreter.parser.VariableMapGenerator;
 import interpreter.rules.Expression;
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.SyntaxException;
 import interpreter.exceptions.ValidExit;
+import interpreter.executer.VariableMapGenerator;
 
 import java.util.Collection;
 import java.util.HashMap;

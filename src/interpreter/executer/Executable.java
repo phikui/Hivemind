@@ -1,4 +1,4 @@
-package interpreter.parser;
+package interpreter.executer;
 
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.ValidExit;

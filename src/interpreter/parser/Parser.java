@@ -1,6 +1,7 @@
 package interpreter.parser;
 
 import interpreter.exceptions.SyntaxException;
+import interpreter.executer.Executable;
 import interpreter.rules.ExitExpression;
 import interpreter.rules.Expression;
 import interpreter.rules.Number;
