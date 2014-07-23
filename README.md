@@ -6,7 +6,7 @@ Hivemind is a survival game of little enteties called survivorBots. The bots *li
 
 The bots are programmed by a scripting language designed for this game called roboScript.
 
-* [roboSkript](https://bitbucket.org/BlindEyeHalo/hivemind/wiki/roboSkript%20Syntax)
+* [Wiki](https://bitbucket.org/BlindEyeHalo/hivemind/wiki/Home)
 
 ## requirements ##
 * [apache commons IO](http://commons.apache.org/proper/commons-io/download_io.cgi)
