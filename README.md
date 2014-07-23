@@ -12,13 +12,13 @@ The bots are programmed by a scripting language designed for this game called ro
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 
-### Contribution guidelines ###
+## Contribution guidelines ##
 
 * Writing tests
 * Code review
 * Other guidelines
 
-### Who do I talk to? ###
+## Who do I talk to? ##
 
 * blindeyehalo1@gmail.com
 * Other community or team contact
