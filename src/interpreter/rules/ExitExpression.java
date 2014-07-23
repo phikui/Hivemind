@@ -10,7 +10,7 @@ public class ExitExpression implements Expression{
 
 	@Override
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
-			throws ExecuteException {
+			throws ExecuteException, ValidExit {
 		
 		throw new ValidExit();
 	}
