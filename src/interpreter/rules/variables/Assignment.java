@@ -2,6 +2,7 @@ package interpreter.rules.variables;
 
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.SyntaxException;
+import interpreter.exceptions.ValidExit;
 import interpreter.parser.VariableMapGenerator;
 import interpreter.rules.Expression;
 import interpreter.rules.Number;
@@ -37,7 +38,7 @@ public class Assignment implements Expression {
 	}
 
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
-			throws ExecuteException {
+			throws ExecuteException, ValidExit {
 
 		variables.put(m_variable_name, new Number(m_value.evaluate(variables, executeStack)));
 

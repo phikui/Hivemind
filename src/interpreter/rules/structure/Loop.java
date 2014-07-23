@@ -1,6 +1,7 @@
 package interpreter.rules.structure;
 
 import interpreter.exceptions.ExecuteException;
+import interpreter.exceptions.ValidExit;
 import interpreter.rules.Expression;
 
 import java.util.Collection;
@@ -16,7 +17,7 @@ public class Loop implements Expression {
 	}
 
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
-			throws ExecuteException {
+			throws ExecuteException, ValidExit {
 		int count = (int) m_count.evaluate(variables, executeStack);
 		Expression sequence;
 		if (count > 1) {

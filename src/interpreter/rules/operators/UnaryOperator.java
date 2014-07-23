@@ -1,6 +1,7 @@
 package interpreter.rules.operators;
 
 import interpreter.exceptions.ExecuteException;
+import interpreter.exceptions.ValidExit;
 import interpreter.rules.Expression;
 
 import java.util.Collection;
@@ -17,7 +18,7 @@ public class UnaryOperator implements Expression {
 	}
 
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
-			throws ExecuteException {
+			throws ExecuteException, ValidExit {
 		double result = 0;
 		double a = m_value.evaluate(variables, executeStack);
 		if (m_operator.equals("!")) {

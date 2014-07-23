@@ -2,6 +2,7 @@ package interpreter.rules.variables;
 
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.SyntaxException;
+import interpreter.exceptions.ValidExit;
 import interpreter.rules.Expression;
 
 import java.util.Collection;
@@ -16,7 +17,7 @@ public class OneTimeAssignment extends Assignment {
 	}
 
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
-			throws ExecuteException {
+			throws ExecuteException, ValidExit {
 		if (!variables.containsKey(super.m_variable_name)) {
 			return super.evaluate(variables, executeStack);
 		} else {

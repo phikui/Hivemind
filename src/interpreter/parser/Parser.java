@@ -1,6 +1,7 @@
 package interpreter.parser;
 
 import interpreter.exceptions.SyntaxException;
+import interpreter.rules.ExitExpression;
 import interpreter.rules.Expression;
 import interpreter.rules.Number;
 import interpreter.rules.Print;
@@ -426,6 +427,13 @@ public class Parser {
 				}
 				return new Print(parseLine(restOfLine, null));
 
+			} else if (token.equals("EXIT")) {
+				Expression ext = new ExitExpression();
+				if (!has_rest) {
+					return ext;
+				} else {
+					return parseLine(restOfLine, ext);
+				}
 			} else if (isNumeric(token)) {
 				Expression numeric;
 				numeric = new Number(Double.parseDouble(token));

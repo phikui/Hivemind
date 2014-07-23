@@ -1,6 +1,7 @@
 package interpreter.parser;
 
 import interpreter.exceptions.ExecuteException;
+import interpreter.exceptions.ValidExit;
 import interpreter.rules.Expression;
 
 import java.util.HashMap;
@@ -59,7 +60,11 @@ public class Executable implements java.io.Serializable {
 				throw new ExecuteException("Exceeded maximum execution time of " + (maxExecutionTime / 1000)
 						+ " seconds");
 			}
-			execution_stack.pop().evaluate(variables, execution_stack);
+			try {
+				execution_stack.pop().evaluate(variables, execution_stack);
+			} catch (ValidExit e) {
+				return currentExecutionTime;
+			}
 
 		}
 		return currentExecutionTime;

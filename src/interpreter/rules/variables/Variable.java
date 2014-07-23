@@ -4,6 +4,7 @@ import interpreter.parser.VariableMapGenerator;
 import interpreter.rules.Expression;
 import interpreter.exceptions.ExecuteException;
 import interpreter.exceptions.SyntaxException;
+import interpreter.exceptions.ValidExit;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class Variable implements Expression {
 		return context.containsKey(m_name);
 	}
 
-	public double evaluate(HashMap<String, Expression> context, Collection<Expression> executeStack) throws ExecuteException {
+	public double evaluate(HashMap<String, Expression> context, Collection<Expression> executeStack) throws ExecuteException, ValidExit {
 		if (context.containsKey(m_name)) {
 			return context.get(m_name).evaluate(context, executeStack);
 		} else {

@@ -1,6 +1,7 @@
 package interpreter.rules;
 
 import interpreter.exceptions.ExecuteException;
+import interpreter.exceptions.ValidExit;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ public class Print implements Expression{
 
 	}
 	
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack) throws ExecuteException {
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack) throws ExecuteException, ValidExit {
 		
 		System.out.println(m_msg.evaluate(variables, executeStack));
 		

@@ -28,24 +28,16 @@ public class VariableMapGenerator {
 
 	public static Set<String> getIllegalVariableNames() {
 		Set<String> illegal = new HashSet<String>();
-		illegal.add("IF");
-		illegal.add("if");
-		illegal.add("endif");
+		illegal.add("IF");		
 		illegal.add("ENDIF");
-		illegal.add("THEN");
-		illegal.add("then");
-		illegal.add("FOR");
-		illegal.add("for");
-		illegal.add("loop");
+		illegal.add("THEN");		
+		illegal.add("FOR");		
 		illegal.add("LOOP");
 		illegal.add("DO");
-		illegal.add("do");
-		illegal.add("ENDFOR");
+		illegal.add("ENDLOOP");
 		illegal.add("endfor");
 		illegal.add("RETURN");
-		illegal.add("return");
 		illegal.add("NOP");
-		illegal.add("nop");
 		illegal.add("log");
 		illegal.add("sqrt");
 		illegal.add("abs");
