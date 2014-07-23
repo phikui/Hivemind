@@ -54,7 +54,7 @@ public class Parser {
 		result = result.replaceAll("=", " = ");
 		result = result.replaceAll("!", " ! ");
 		result = result.replaceAll("\\?", " ? ");
-		result = result.replaceAll("�", " � ");
+		//result = result.replaceAll("�", " � ");
 		result = result.replaceAll("\\(", " ( ");
 		result = result.replaceAll("\\)", " ) ");
 
