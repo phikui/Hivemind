@@ -27,7 +27,7 @@ public class Variable implements Expression {
 												// case sensitive
 		String upper = m_name.toUpperCase();
 		if ((!is_valid) || illegals.contains(lower) || illegals.contains(upper)) {
-			throw new SyntaxException("Illegal variable name " + m_name);
+			throw new SyntaxException("Illegal variable name " + m_name+". Please only use alphanumerical symbols including underscore (_) and no reserved keywords.");
 			
 		}
 	}
