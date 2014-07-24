@@ -22,11 +22,11 @@ public class Variable implements Expression {
 	public Variable(String name) throws SyntaxException{
 		m_name = name;
 
-		boolean hasNonAlpha = m_name.matches("^.*[^a-zA-Z0-9 ].*$");
+		boolean is_valid = m_name.matches("^[a-zA-Z0-9_]*$");
 		String lower = m_name.toLowerCase(); // Illegal check should not be
 												// case sensitive
 		String upper = m_name.toUpperCase();
-		if (hasNonAlpha || illegals.contains(lower) || illegals.contains(upper)) {
+		if ((!is_valid) || illegals.contains(lower) || illegals.contains(upper)) {
 			throw new SyntaxException("Illegal variable name " + m_name);
 			
 		}
