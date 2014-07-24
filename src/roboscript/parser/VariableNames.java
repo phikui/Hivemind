@@ -1,44 +1,42 @@
 package roboscript.parser;
 
+import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
+
+import roboscript.StringDefinitions;
 
 public class VariableNames {
 	private static Set<String> illegalNames, illegalAssignments;
 
 	public static Set<String> getIllegalVariableNames() {
+		Properties keywords = StringDefinitions.getKeywords();
 		if (illegalNames == null) {
 			illegalNames = new HashSet<String>();
-			illegalNames.add("IF");
-			illegalNames.add("ENDIF");
-			illegalNames.add("THEN");
-			illegalNames.add("FOR");
-			illegalNames.add("LOOP");
-			illegalNames.add("DO");
-			illegalNames.add("ENDLOOP");
-			illegalNames.add("endfor");
-			illegalNames.add("RETURN");
-			illegalNames.add("NOP");
-			illegalNames.add("log");
-			illegalNames.add("sqrt");
-			illegalNames.add("abs");
-			illegalNames.add("EXIT");
+			Enumeration<?> e = keywords.propertyNames();
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String value = keywords.getProperty(key);
+				illegalNames.add(value);
+			}
+
+
 		}
 		return illegalNames;
 	}
 
 	public static Set<String> getIllegalAssignments() {
+		Properties constants = StringDefinitions.getConstants();
 		if (illegalAssignments == null) {
 			illegalAssignments = new HashSet<String>();
-			illegalAssignments.add("TRUE");
-			illegalAssignments.add("true");
-			illegalAssignments.add("FALSE");
-			illegalAssignments.add("false");
-			illegalAssignments.add("PI");
-			illegalAssignments.add("E");
-			illegalAssignments.add("MAX");
-			illegalAssignments.add("MIN");
-			illegalAssignments.add("rand");
+			Enumeration<?> e = constants.propertyNames();
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String value = constants.getProperty(key);
+				illegalAssignments.add(value);
+			}
+		
 		}
 		return illegalAssignments;
 	}

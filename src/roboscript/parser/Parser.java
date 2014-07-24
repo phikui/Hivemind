@@ -3,9 +3,11 @@ package roboscript.parser;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.LinkedList;
+import java.util.Properties;
 import java.util.Queue;
 import java.util.Stack;
 
+import roboscript.StringDefinitions;
 import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.expressions.ExitExpression;
@@ -89,6 +91,7 @@ public class Parser {
 	 */
 
 	protected static Expression parseLine(String line, Expression previous) throws SyntaxException {
+		Properties keywords = StringDefinitions.getKeywords();
 		if (line.length() > 0) {
 
 			String[] tokens = line.split(" ");
@@ -252,7 +255,7 @@ public class Parser {
 					return new Sequence(previous, null);
 				}
 
-			} else if (token.equals("LOOP") || (token.equals("WHILE") && WHILE_ENABLED)) {
+			} else if (token.equals(keywords.getProperty("loop")) || (token.equals(keywords.getProperty("while")) && WHILE_ENABLED)) {
 				if (!has_rest) {
 					throw new SyntaxException("Expected statements after " + token);
 				}
@@ -270,13 +273,13 @@ public class Parser {
 				// searching for end of condition
 				level = 0;
 				for (int i = 1; i < tokens.length; i++) {
-					if (tokens[i].equals("LOOP") || tokens[i].equals("WHILE")) {
+					if (tokens[i].equals(keywords.getProperty("loop")) || tokens[i].equals(keywords.getProperty("while"))) {
 						level++;
-					} else if (tokens[i].equals("ENDLOOP")) {
+					} else if (tokens[i].equals(keywords.getProperty("endloop"))) {
 						level--;
 					}
 
-					if (tokens[i].equals("DO") && level == 0) {
+					if (tokens[i].equals(keywords.getProperty("do")) && level == 0) {
 						closing_index_condition = i;
 						break;
 					}
@@ -285,18 +288,18 @@ public class Parser {
 				}
 
 				if (closing_index_condition == -1) {
-					throw new SyntaxException("Expected DO after " + token);
+					throw new SyntaxException("Expected "+keywords.getProperty("do")+" after " + token);
 				}
 
 				level = 1;
 				for (int i = closing_index_condition + 1; i < tokens.length; i++) {
-					if (tokens[i].equals("LOOP") || tokens[i].equals("WHILE")) {
+					if (tokens[i].equals(keywords.getProperty("loop")) || tokens[i].equals(keywords.getProperty("while"))) {
 						level++;
-					} else if (tokens[i].equals("ENDLOOP")) {
+					} else if (tokens[i].equals(keywords.getProperty("endloop"))) {
 						level--;
 					}
 
-					if (tokens[i].equals("ENDLOOP") && level == 0) {
+					if (tokens[i].equals(keywords.getProperty("endloop")) && level == 0) {
 						closing_index_loop = i;
 
 						break;
@@ -305,7 +308,7 @@ public class Parser {
 					loop.append(' ');
 				}
 				if (closing_index_loop == -1) {
-					throw new SyntaxException("Expected ENDLOOP after " + token);
+					throw new SyntaxException("Expected "+keywords.getProperty("endloop")+" after " + token);
 				}
 
 				for (int i = closing_index_loop + 1; i < tokens.length; i++) {
@@ -316,7 +319,7 @@ public class Parser {
 				Expression cond = parseLine(condition.toString(), null);
 				Expression inner = parseLine(loop.toString(), null);
 				Expression loopExpression;
-				if (token.equals("LOOP")) {
+				if (token.equals(keywords.getProperty("loop"))) {
 					loopExpression = new Loop(cond, inner);
 				} else {
 					loopExpression = new WhileLoop(cond, inner);
@@ -327,7 +330,7 @@ public class Parser {
 					return loopExpression;
 				}
 
-			} else if (token.equals("IF")) {
+			} else if (token.equals(keywords.getProperty("if"))) {
 				if (!has_rest) {
 					throw new SyntaxException("Exprected statements after " + token);
 				}
@@ -347,13 +350,13 @@ public class Parser {
 				// searching for end of condition
 				level = 0;
 				for (int i = 1; i < tokens.length; i++) {
-					if (tokens[i].equals("IF")) {
+					if (tokens[i].equals(keywords.getProperty("if"))) {
 						level++;
-					} else if (tokens[i].equals("ENDIF")) {
+					} else if (tokens[i].equals(keywords.getProperty("endif"))) {
 						level--;
 					}
 
-					if (tokens[i].equals("THEN") && level == 0) {
+					if (tokens[i].equals(keywords.getProperty("then")) && level == 0) {
 						closing_index_condition = i;
 						break;
 					}
@@ -362,22 +365,22 @@ public class Parser {
 				}
 
 				if (closing_index_condition == -1) {
-					throw new SyntaxException("Expected THEN after " + token);
+					throw new SyntaxException("Expected "+keywords.getProperty("then")+" after " + token);
 				}
 
 				level = 0;
 				has_else = false;
 				for (int i = closing_index_condition + 1; i < tokens.length; i++) {
-					if (tokens[i].equals("IF")) {
+					if (tokens[i].equals(keywords.getProperty("if"))) {
 						level++;
-					} else if (tokens[i].equals("ENDIF")) {
+					} else if (tokens[i].equals(keywords.getProperty("endif"))) {
 						level--;
 					}
 
-					if ((tokens[i].equals("ELSE") || tokens[i].equals("ENDIF")) && level <= 0) {
+					if ((tokens[i].equals(keywords.getProperty("else")) || tokens[i].equals(keywords.getProperty("endif"))) && level <= 0) {
 						closing_index_true = i;
 
-						if (tokens[i].equals("ELSE")) {
+						if (tokens[i].equals(keywords.getProperty("else"))) {
 							has_else = true;
 						}
 						break;
@@ -392,9 +395,9 @@ public class Parser {
 				} else {
 					level = 1;
 					for (int i = closing_index_true + 1; i < tokens.length; i++) {
-						if (tokens[i].equals("IF")) {
+						if (tokens[i].equals(keywords.getProperty("if"))) {
 							level++;
-						} else if (tokens[i].equals("ENDIF")) {
+						} else if (tokens[i].equals(keywords.getProperty("endif"))) {
 							level--;
 							if (level == 0) {
 								closing_index_false = i;

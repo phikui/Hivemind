@@ -1,1 +1,1 @@
-then = 1;
+print then;
