@@ -31,9 +31,11 @@ public class Variable implements Expression {
 		String lower = m_name.toLowerCase(); // Illegal check should not be
 												// case sensitive
 		String upper = m_name.toUpperCase();
-		if ((!is_valid) || illegals.contains(lower) || illegals.contains(upper)) {
-			throw new SyntaxException("Illegal variable name " + m_name+". Please only use alphanumerical symbols including underscore (_) and no reserved keywords.");
+		if ((!is_valid) ) {
+			throw new SyntaxException("Illegal variable name " + m_name+". Please only use alphanumerical symbols including underscore (_)");
 			
+		} else if (illegals.contains(lower) || illegals.contains(upper)){
+			throw new SyntaxException("Illegal variable name " + m_name+". "+ m_name.toUpperCase() +" is a reserved keyword (not case sensetive).");
 		}
 	}
 
