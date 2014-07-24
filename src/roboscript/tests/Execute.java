@@ -13,6 +13,7 @@ public class Execute {
 
 		Executable x = ScriptCompiler.compile("./scripts/test.rs");
 		x.boxed_execute();
+		System.out.println(x.getConsole().toString());
 	}
 
 }

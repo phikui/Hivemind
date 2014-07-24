@@ -3,6 +3,7 @@ package roboscript.interpreter.expressions.structure;
 import java.util.Collection;
 import java.util.HashMap;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
 import roboscript.interpreter.expressions.Expression;
@@ -20,14 +21,14 @@ public class Sequence implements Expression {
 		m_b = b;
 	}
 
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer)
 			throws ExecuteException, ValidExit {
 
 		if (m_b != null) {
 			executeStack.add(m_b);
 		}
 		if (m_a != null) {
-			return m_a.evaluate(variables, executeStack);
+			return m_a.evaluate(variables, executeStack, executer);
 		}
 		return 0;
 

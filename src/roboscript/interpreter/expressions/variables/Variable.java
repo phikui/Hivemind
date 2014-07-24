@@ -1,5 +1,6 @@
 package roboscript.interpreter.expressions.variables;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
@@ -47,9 +48,9 @@ public class Variable implements Expression {
 		return context.containsKey(m_name);
 	}
 
-	public double evaluate(HashMap<String, Expression> context, Collection<Expression> executeStack) throws ExecuteException, ValidExit {
+	public double evaluate(HashMap<String, Expression> context, Collection<Expression> executeStack, Executable executer) throws ExecuteException, ValidExit {
 		if (context.containsKey(m_name)) {
-			return context.get(m_name).evaluate(context, executeStack);
+			return context.get(m_name).evaluate(context, executeStack, executer);
 		} else {
 			throw new ExecuteException("Variable " + m_name + " has no value");
 		}

@@ -3,6 +3,7 @@ package roboscript.interpreter.expressions;
 import java.util.Collection;
 import java.util.HashMap;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
 
@@ -18,9 +19,9 @@ public class Print implements Expression{
 
 	}
 	
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack) throws ExecuteException, ValidExit {
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer) throws ExecuteException, ValidExit {
 		
-		System.out.println(m_msg.evaluate(variables, executeStack));
+		executer.getConsole().println(m_msg.evaluate(variables, executeStack, executer));
 		
 		return 1;
 	}

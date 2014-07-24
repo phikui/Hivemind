@@ -1,5 +1,6 @@
 package roboscript.interpreter.expressions.variables;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
@@ -41,10 +42,10 @@ public class Assignment implements Expression {
 		}
 	}
 
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer)
 			throws ExecuteException, ValidExit {
 
-		variables.put(m_variable_name, new Number(m_value.evaluate(variables, executeStack)));
+		variables.put(m_variable_name, new Number(m_value.evaluate(variables, executeStack, executer)));
 
 		return 1;
 	}

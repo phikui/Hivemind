@@ -17,10 +17,15 @@ public class Executable implements java.io.Serializable {
 	private static final long maxExecutionTime = 10 * 1000;
 	private static final long maxVariableMapSize = 100;
 
+	private Console console;
 	private Expression m_head;
 	private Stack<Expression> execution_stack = new Stack<Expression>();
 	private String sourcefile = "NONE_DEFINED";
 
+	public Console getConsole(){
+		return console;
+	}
+	
 	public String getSourceFile() {
 		return sourcefile;
 	}
@@ -31,15 +36,18 @@ public class Executable implements java.io.Serializable {
 
 	public Executable(Expression head) {
 		m_head = head;
+		console = new Console();
 	}
 
 	public Executable(Expression head, String source) {
 		m_head = head;
 		sourcefile = source;
+		console = new Console();
 	}
 
 	// execute that handles exceptions
 	public void boxed_execute() {
+		console.clear();
 		try {
 			execute(VariableMapGenerator.getVariableMap());
 		} catch (ExecuteException e) {
@@ -63,12 +71,13 @@ public class Executable implements java.io.Serializable {
 						+ " seconds");
 			}
 			try {
-				execution_stack.pop().evaluate(variables, execution_stack);
+				execution_stack.pop().evaluate(variables, execution_stack, this);
 			} catch (ValidExit e) {
 				return currentExecutionTime;
 			}
 
 		}
+		
 		return currentExecutionTime;
 	}
 

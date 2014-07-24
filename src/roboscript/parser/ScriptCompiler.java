@@ -115,7 +115,8 @@ public class ScriptCompiler {
 			return x;
 		} catch (Exception e) {
 			new File(tmp).delete();
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println("Incorrect File");
 			return null;
 		}
 

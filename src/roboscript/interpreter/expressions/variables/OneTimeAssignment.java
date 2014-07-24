@@ -3,6 +3,7 @@ package roboscript.interpreter.expressions.variables;
 import java.util.Collection;
 import java.util.HashMap;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
@@ -21,10 +22,10 @@ public class OneTimeAssignment extends Assignment {
 
 	}
 
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer)
 			throws ExecuteException, ValidExit {
 		if (!variables.containsKey(super.m_variable_name)) {
-			return super.evaluate(variables, executeStack);
+			return super.evaluate(variables, executeStack, executer);
 		} else {
 			return 1;
 		}

@@ -3,6 +3,7 @@ package roboscript.interpreter.expressions.operators;
 import java.util.Collection;
 import java.util.HashMap;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
 import roboscript.interpreter.expressions.Expression;
@@ -21,10 +22,10 @@ public class UnaryOperator implements Expression {
 		m_value = value;
 	}
 
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer)
 			throws ExecuteException, ValidExit {
 		double result = 0;
-		double a = m_value.evaluate(variables, executeStack);
+		double a = m_value.evaluate(variables, executeStack, executer);
 		if (m_operator.equals("!")) {
 			if (a == 0) {
 				result = 1;

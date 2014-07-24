@@ -3,6 +3,7 @@ package roboscript.interpreter.expressions.operators;
 import java.util.Collection;
 import java.util.HashMap;
 
+import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
 import roboscript.interpreter.expressions.Expression;
@@ -22,11 +23,11 @@ public class BinaryOperator implements Expression {
 		m_right = right;
 	}
 
-	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack)
+	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer)
 			throws ExecuteException, ValidExit {
 		double result = 0.;
-		double a = m_left.evaluate(variables, executeStack);
-		double b = m_right.evaluate(variables, executeStack);
+		double a = m_left.evaluate(variables, executeStack, executer);
+		double b = m_right.evaluate(variables, executeStack, executer);
 
 		if (m_operator.equals("+")) {
 			result = a + b;
