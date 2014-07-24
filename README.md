@@ -15,11 +15,8 @@ The bots are programmed by a scripting language designed for this game called ro
 
 ## Contribution guidelines ##
 
-* Writing tests
-* Code review
-* Other guidelines
+* coming
 
 ## Who do I talk to? ##
 
 * blindeyehalo1@gmail.com
-* Other community or team contact
