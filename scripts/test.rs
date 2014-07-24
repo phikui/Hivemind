@@ -3,21 +3,21 @@ x = 1;
 LOOP 10 DO
     x++;
     IF (x % 2) == 0 THEN
-        print x
+        println x
     ENDIF
 ENDLOOP /* this also a comment*/
-print /* more comment*/ x;
-print PI;
+println /* more comment*/ x;
+println PI;
 /* a comment 
 spanning
 multiple lines */ 
 
 WHILE x <= 20 DO
     x++;
-    print 42;
+    println 42;
     LOOP 2 DO
-        print 1;
+        println 1;
     ENDLOOP
 ENDLOOP
 
-print 80;
+println 80;

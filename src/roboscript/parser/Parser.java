@@ -14,6 +14,7 @@ import roboscript.interpreter.expressions.ExitExpression;
 import roboscript.interpreter.expressions.Expression;
 import roboscript.interpreter.expressions.Number;
 import roboscript.interpreter.expressions.Print;
+import roboscript.interpreter.expressions.Println;
 import roboscript.interpreter.expressions.operators.BinaryOperator;
 import roboscript.interpreter.expressions.operators.UnaryOperator;
 import roboscript.interpreter.expressions.structure.IfExpression;
@@ -56,7 +57,7 @@ public class Parser {
 		result = result.replaceAll("=", " = ");
 		result = result.replaceAll("!", " ! ");
 		result = result.replaceAll("\\?", " ? ");
-		//result = result.replaceAll("�", " � ");
+		// result = result.replaceAll("�", " � ");
 		result = result.replaceAll("\\(", " ( ");
 		result = result.replaceAll("\\)", " ) ");
 
@@ -255,7 +256,8 @@ public class Parser {
 					return new Sequence(previous, null);
 				}
 
-			} else if (token.equals(keywords.getProperty("loop")) || (token.equals(keywords.getProperty("while")) && WHILE_ENABLED)) {
+			} else if (token.equals(keywords.getProperty("loop"))
+					|| (token.equals(keywords.getProperty("while")) && WHILE_ENABLED)) {
 				if (!has_rest) {
 					throw new SyntaxException("Expected statements after " + token);
 				}
@@ -273,7 +275,8 @@ public class Parser {
 				// searching for end of condition
 				level = 0;
 				for (int i = 1; i < tokens.length; i++) {
-					if (tokens[i].equals(keywords.getProperty("loop")) || tokens[i].equals(keywords.getProperty("while"))) {
+					if (tokens[i].equals(keywords.getProperty("loop"))
+							|| tokens[i].equals(keywords.getProperty("while"))) {
 						level++;
 					} else if (tokens[i].equals(keywords.getProperty("endloop"))) {
 						level--;
@@ -288,12 +291,13 @@ public class Parser {
 				}
 
 				if (closing_index_condition == -1) {
-					throw new SyntaxException("Expected "+keywords.getProperty("do")+" after " + token);
+					throw new SyntaxException("Expected " + keywords.getProperty("do") + " after " + token);
 				}
 
 				level = 1;
 				for (int i = closing_index_condition + 1; i < tokens.length; i++) {
-					if (tokens[i].equals(keywords.getProperty("loop")) || tokens[i].equals(keywords.getProperty("while"))) {
+					if (tokens[i].equals(keywords.getProperty("loop"))
+							|| tokens[i].equals(keywords.getProperty("while"))) {
 						level++;
 					} else if (tokens[i].equals(keywords.getProperty("endloop"))) {
 						level--;
@@ -308,7 +312,7 @@ public class Parser {
 					loop.append(' ');
 				}
 				if (closing_index_loop == -1) {
-					throw new SyntaxException("Expected "+keywords.getProperty("endloop")+" after " + token);
+					throw new SyntaxException("Expected " + keywords.getProperty("endloop") + " after " + token);
 				}
 
 				for (int i = closing_index_loop + 1; i < tokens.length; i++) {
@@ -365,7 +369,7 @@ public class Parser {
 				}
 
 				if (closing_index_condition == -1) {
-					throw new SyntaxException("Expected "+keywords.getProperty("then")+" after " + token);
+					throw new SyntaxException("Expected " + keywords.getProperty("then") + " after " + token);
 				}
 
 				level = 0;
@@ -377,7 +381,8 @@ public class Parser {
 						level--;
 					}
 
-					if ((tokens[i].equals(keywords.getProperty("else")) || tokens[i].equals(keywords.getProperty("endif"))) && level <= 0) {
+					if ((tokens[i].equals(keywords.getProperty("else")) || tokens[i].equals(keywords
+							.getProperty("endif"))) && level <= 0) {
 						closing_index_true = i;
 
 						if (tokens[i].equals(keywords.getProperty("else"))) {
@@ -425,19 +430,26 @@ public class Parser {
 					return ifStatement;
 				}
 
-			} else if (token.equals("print")) {
+			} else if (token.equals(keywords.getProperty("print"))) {
 				if (!has_rest) {
 					throw new SyntaxException("Expected message for " + token);
 				}
 				return new Print(parseLine(restOfLine, null));
 
-			} else if (token.equals("EXIT")) {
+			} else if (token.equals(keywords.getProperty("println"))) {
+				if (!has_rest) {
+					throw new SyntaxException("Expected message for " + token);
+				}
+				return new Println(parseLine(restOfLine, null));
+
+			} else if (token.equals(keywords.getProperty("exit"))) {
 				Expression ext = new ExitExpression();
 				if (!has_rest) {
 					return ext;
 				} else {
 					return parseLine(restOfLine, ext);
 				}
+
 			} else if (isNumeric(token)) {
 				Expression numeric;
 				numeric = new Number(Double.parseDouble(token));

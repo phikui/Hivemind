@@ -21,7 +21,7 @@ public class Print implements Expression{
 	
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer) throws ExecuteException, ValidExit {
 		
-		executer.getConsole().println(m_msg.evaluate(variables, executeStack, executer));
+		executer.getConsole().print(m_msg.evaluate(variables, executeStack, executer));
 		
 		return 1;
 	}
