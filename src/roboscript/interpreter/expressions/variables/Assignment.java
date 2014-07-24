@@ -1,10 +1,10 @@
-package roboscript.interpreter.rules.variables;
+package roboscript.interpreter.expressions.variables;
 
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
-import roboscript.interpreter.rules.Expression;
-import roboscript.interpreter.rules.Number;
+import roboscript.interpreter.expressions.Expression;
+import roboscript.interpreter.expressions.Number;
 import roboscript.parser.VariableNames;
 
 import java.util.Collection;

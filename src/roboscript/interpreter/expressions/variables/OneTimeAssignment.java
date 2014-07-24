@@ -1,4 +1,4 @@
-package roboscript.interpreter.rules.variables;
+package roboscript.interpreter.expressions.variables;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
-import roboscript.interpreter.rules.Expression;
+import roboscript.interpreter.expressions.Expression;
 
 //only assigns a value if variable has none
 public class OneTimeAssignment extends Assignment {

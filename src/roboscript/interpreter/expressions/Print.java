@@ -1,4 +1,4 @@
-package roboscript.interpreter.rules;
+package roboscript.interpreter.expressions;
 
 import java.util.Collection;
 import java.util.HashMap;

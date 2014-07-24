@@ -1,11 +1,11 @@
-package roboscript.interpreter.rules.operators;
+package roboscript.interpreter.expressions.operators;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
-import roboscript.interpreter.rules.Expression;
+import roboscript.interpreter.expressions.Expression;
 
 public class UnaryOperator implements Expression {
 

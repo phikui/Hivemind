@@ -8,21 +8,21 @@ import java.util.Stack;
 
 import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.SyntaxException;
-import roboscript.interpreter.rules.ExitExpression;
-import roboscript.interpreter.rules.Expression;
-import roboscript.interpreter.rules.Number;
-import roboscript.interpreter.rules.Print;
-import roboscript.interpreter.rules.operators.BinaryOperator;
-import roboscript.interpreter.rules.operators.UnaryOperator;
-import roboscript.interpreter.rules.structure.IfExpression;
-import roboscript.interpreter.rules.structure.Loop;
-import roboscript.interpreter.rules.structure.Sequence;
-import roboscript.interpreter.rules.structure.WhileLoop;
-import roboscript.interpreter.rules.variables.Assignment;
-import roboscript.interpreter.rules.variables.DeleteVariable;
-import roboscript.interpreter.rules.variables.OneTimeAssignment;
-import roboscript.interpreter.rules.variables.ValueCheck;
-import roboscript.interpreter.rules.variables.Variable;
+import roboscript.interpreter.expressions.ExitExpression;
+import roboscript.interpreter.expressions.Expression;
+import roboscript.interpreter.expressions.Number;
+import roboscript.interpreter.expressions.Print;
+import roboscript.interpreter.expressions.operators.BinaryOperator;
+import roboscript.interpreter.expressions.operators.UnaryOperator;
+import roboscript.interpreter.expressions.structure.IfExpression;
+import roboscript.interpreter.expressions.structure.Loop;
+import roboscript.interpreter.expressions.structure.Sequence;
+import roboscript.interpreter.expressions.structure.WhileLoop;
+import roboscript.interpreter.expressions.variables.Assignment;
+import roboscript.interpreter.expressions.variables.DeleteVariable;
+import roboscript.interpreter.expressions.variables.OneTimeAssignment;
+import roboscript.interpreter.expressions.variables.ValueCheck;
+import roboscript.interpreter.expressions.variables.Variable;
 
 public class Parser {
 

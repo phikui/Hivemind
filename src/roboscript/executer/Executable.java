@@ -5,7 +5,7 @@ import java.util.Stack;
 
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
-import roboscript.interpreter.rules.Expression;
+import roboscript.interpreter.expressions.Expression;
 
 public class Executable implements java.io.Serializable {
 	/**

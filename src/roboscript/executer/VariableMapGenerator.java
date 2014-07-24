@@ -2,9 +2,9 @@ package roboscript.executer;
 
 import java.util.HashMap;
 
-import roboscript.interpreter.rules.Expression;
-import roboscript.interpreter.rules.Number;
-import roboscript.interpreter.rules.RandomNumber;
+import roboscript.interpreter.expressions.Expression;
+import roboscript.interpreter.expressions.Number;
+import roboscript.interpreter.expressions.RandomNumber;
 
 public class VariableMapGenerator {
 

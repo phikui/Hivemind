@@ -1,6 +1,6 @@
-package roboscript.interpreter.rules.variables;
+package roboscript.interpreter.expressions.variables;
 
-import roboscript.interpreter.rules.Expression;
+import roboscript.interpreter.expressions.Expression;
 
 public abstract class VariableFunction implements Expression {
 

@@ -1,10 +1,10 @@
-package roboscript.interpreter.rules.variables;
+package roboscript.interpreter.expressions.variables;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 import roboscript.interpreter.exceptions.ExecuteException;
-import roboscript.interpreter.rules.Expression;
+import roboscript.interpreter.expressions.Expression;
 
 public class ValueCheck extends VariableFunction {
 

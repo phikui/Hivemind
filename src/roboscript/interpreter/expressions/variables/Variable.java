@@ -1,9 +1,9 @@
-package roboscript.interpreter.rules.variables;
+package roboscript.interpreter.expressions.variables;
 
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
-import roboscript.interpreter.rules.Expression;
+import roboscript.interpreter.expressions.Expression;
 import roboscript.parser.VariableNames;
 
 import java.util.Collection;
@@ -21,6 +21,11 @@ public class Variable implements Expression {
 
 	public Variable(String name) throws SyntaxException{
 		m_name = name;
+		char[] m_name_symbols = m_name.toCharArray();
+		char last_symbol = m_name_symbols[m_name_symbols.length-1];
+		if(last_symbol == '_'){
+			throw new SyntaxException ("Variable name can't end with _");
+		}
 
 		boolean is_valid = m_name.matches("^[a-zA-Z0-9_]*$");
 		String lower = m_name.toLowerCase(); // Illegal check should not be
