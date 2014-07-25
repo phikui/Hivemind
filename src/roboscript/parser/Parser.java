@@ -121,8 +121,13 @@ public class Parser {
 					|| token.equals("|") || token.equals("?") || token.equals("%") || token.equals("<=")
 					|| token.equals(">=")) {
 				if (previous == null) {
-					throw new SyntaxException("Expected left operand for " + token);
-				} else if (!has_rest) {
+					if (token.equals("-") || token.equals("+")) {
+						previous = new Number(0);
+					} else {
+						throw new SyntaxException("Expected left operand for " + token);
+					}
+				}
+				if (!has_rest) {
 					throw new SyntaxException("Expected right operand for " + token);
 				}
 

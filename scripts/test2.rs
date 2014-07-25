@@ -1,1 +1,2 @@
-print then;
+x = -1;
+print x;
