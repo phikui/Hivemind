@@ -1,2 +1,3 @@
-x = -1;
-print x;
+LOOP 10 DO
+	println randi 8;
+ENDLOOP
