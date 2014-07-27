@@ -2,6 +2,7 @@ package board;
 
 public class Position {
 	protected int x, y;
+	protected static int max_x, max_y;
 
 	public Position(int x, int y) {
 		this.x = x;
@@ -50,12 +51,14 @@ public class Position {
 			new_x++;
 			new_y++;
 			break;
+		default:
+			break;
 		}
 		newPos = new Position(new_x, new_y);
 		return newPos;
 	}
 
 	public boolean isValid() {
-		return (x >= 0 && y >= 0);
+		return (x >= 0 && y >= 0 && x <= max_x && y <= max_y);
 	}
 }

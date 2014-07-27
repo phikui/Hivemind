@@ -26,6 +26,8 @@ public class GameBoard {
 		fillWithFood(p);
 		bots = new ArrayList<Robot>();
 		deadBots = new ArrayList<Robot>();
+		Position.max_x = x_dimension - 1;
+		Position.max_y = y_dimension - 1;
 	}
 
 	private void initCells() {
@@ -45,7 +47,7 @@ public class GameBoard {
 
 			int random_x = rand.nextInt(x_dimension);
 			int random_y = rand.nextInt(y_dimension);
-			cells[random_x][random_y].addFood(new Food(50, cells[random_x][random_y]));
+			cells[random_x][random_y].addFood(new Food(20, cells[random_x][random_y]));
 			toFill--;
 
 		}
@@ -77,8 +79,8 @@ public class GameBoard {
 	public void printBoard() {
 		System.out.println("B=Bot,O=empty,F=Food");
 
-		for (int i = 0; i < x_dimension; i++) {
-			for (int j = 0; j < y_dimension; j++) {
+		for (int j = 0; j < x_dimension; j++) {
+			for (int i = 0; i < y_dimension; i++) {
 				if (cells[i][j].isOccupied()) {
 					System.out.print("B ");
 				} else if (cells[i][j].hasFood()) {
@@ -120,20 +122,41 @@ public class GameBoard {
 
 	public void executeRobots() {
 		for (Robot bot : bots) {
-			//System.out.println("begin executing "+bot.getID());
+			// System.out.println("begin executing "+bot.getID());
 			executeMoveRobot(bot);
-			//System.out.println("done executing "+bot.getID());
+			// System.out.println("done executing "+bot.getID());
 		}
 		cleanDeadRobots();
+	}
+
+	private void moveRobot(Robot bot, int direction) {
+		if (direction == 0) {
+			return;
+		}
+		Position old_pos = bot.getPosition().getPosition();
+		Position new_pos = old_pos.move(direction);
+
+		if (new_pos.isValid()) {
+			Cell new_cell = cells[new_pos.x][new_pos.y];
+			if (!new_cell.isOccupied()) {
+				cells[old_pos.x][old_pos.y].deleteOccupant();
+				new_cell.addBot(bot);
+				bot.setPosition(new_cell);
+			} else {
+				deadBots.add(bot);
+			}
+		} else {
+			deadBots.add(bot);
+		}
 	}
 
 	private void executeMoveRobot(Robot bot) {
 		long executeTime = 0;
 
 		try {
-			//System.out.println("starting executable");
+			// System.out.println("starting executable");
 			executeTime = bot.execute();
-			//System.out.println("done executable");
+			// System.out.println("done executable");
 		} catch (ExecuteException e) {
 			deadBots.add(bot);
 			return;
@@ -146,7 +169,9 @@ public class GameBoard {
 			deadBots.add(bot);
 			return;
 		}
-
+		int x = rand.nextInt(9);
+		System.out.println("new direction " + x);
+		moveRobot(bot, x);
 	}
 
 }

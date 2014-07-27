@@ -16,7 +16,7 @@ public class Robot {
 	private int energy;
 	private int health;
 	private Executable code;
-	private HashMap<String, Expression> variables;
+	protected HashMap<String, Expression> variables;
 	private Cell position;
 
 	protected Cell getPosition() {

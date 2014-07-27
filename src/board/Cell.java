@@ -9,6 +9,18 @@ public class Cell {
 	public Cell(Position position) {
 		pos = position;
 	}
+	
+	protected void deleteOccupant(){
+		occupant = null;
+	}
+
+	protected void addBot(Robot bot) {
+		occupant = bot;
+		if (hasFood()) {
+			occupant.gainEnergy(food.getAmount());
+			food = null;
+		}
+	}
 
 	public boolean isOccupied() {
 		return occupant != null;
@@ -22,9 +34,7 @@ public class Cell {
 		this.food = food;
 	}
 
-	public void addBot(Robot bot) {
-		occupant = bot;
-	}
+	
 
 	public Position getPosition() {
 		return pos;
