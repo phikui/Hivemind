@@ -18,6 +18,7 @@ public class Robot {
 	private Executable code;
 	protected HashMap<String, Expression> variables;
 	private Cell position;
+	private int age;
 
 	protected Cell getPosition() {
 		return position;
@@ -42,9 +43,12 @@ public class Robot {
 		health = max_health;
 		SecureRandom random = new SecureRandom();
 		id = new BigInteger(50, random).toString(32);
-		
+		age=0;
 	}
 
+	protected void incrementAge(){
+		age++;
+	}
 	public void gainEnergy(int amount) {
 		energy += amount;
 		energy = Math.min(energy, max_energy);

@@ -186,7 +186,8 @@ public class Parser {
 				}
 
 				// unary operators
-			} else if (token.equals("!") || token.equals("sqrt") || token.equals("abs") || token.equals("log")) {
+			} else if (token.equals("!") || token.equals("sqrt") || token.equals("abs") || token.equals("log")
+					|| token.equals("randi")) {
 
 				if (has_rest) {
 					return new UnaryOperator(token, parseLine(restOfLine, null));

@@ -82,11 +82,11 @@ public class GameBoard {
 		for (int j = 0; j < x_dimension; j++) {
 			for (int i = 0; i < y_dimension; i++) {
 				if (cells[i][j].isOccupied()) {
-					System.out.print("B ");
+					System.out.print("[B] ");
 				} else if (cells[i][j].hasFood()) {
-					System.out.print("F ");
+					System.out.print("[F] ");
 				} else {
-					System.out.print("O ");
+					System.out.print("[ ] ");
 				}
 			}
 			System.out.println();
@@ -123,7 +123,7 @@ public class GameBoard {
 	public void executeRobots() {
 		for (Robot bot : bots) {
 			// System.out.println("begin executing "+bot.getID());
-			executeMoveRobot(bot);
+			executeRobot(bot);
 			// System.out.println("done executing "+bot.getID());
 		}
 		cleanDeadRobots();
@@ -143,6 +143,7 @@ public class GameBoard {
 				new_cell.addBot(bot);
 				bot.setPosition(new_cell);
 			} else {
+				//TODO attack move on new_cell
 				deadBots.add(bot);
 			}
 		} else {
@@ -150,7 +151,7 @@ public class GameBoard {
 		}
 	}
 
-	private void executeMoveRobot(Robot bot) {
+	private void executeRobot(Robot bot) {
 		long executeTime = 0;
 
 		try {
@@ -170,8 +171,9 @@ public class GameBoard {
 			return;
 		}
 		int x = rand.nextInt(9);
-		System.out.println("new direction " + x);
+		//System.out.println("new direction " + x);
 		moveRobot(bot, x);
+		bot.incrementAge();
 	}
 
 }
