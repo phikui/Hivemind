@@ -5,6 +5,11 @@ public class Cell {
 	private Robot occupant;
 	private Food food;
 	private Position pos;
+	
+
+	public Robot getOccupant() {
+		return occupant;
+	}
 
 	public Cell(Position position) {
 		pos = position;

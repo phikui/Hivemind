@@ -56,9 +56,10 @@ public class GameBoard {
 
 	public void addRobotFromFile(String file) {
 		Executable code = ScriptCompiler.compile("./scripts/test2.rs");
-		Robot bot = new Robot(code);
+		String[] tokens = file.split("/");
+		
+		Robot bot = new Robot(code,tokens[tokens.length-1]);
 		addRobot(bot);
-
 	}
 
 	private void cleanDeadRobots() {
@@ -77,14 +78,14 @@ public class GameBoard {
 	}
 
 	public void printBoard() {
-		System.out.println("B=Bot,O=empty,F=Food");
+		System.out.println("[X]=Bot,*=Food");
 
 		for (int j = 0; j < x_dimension; j++) {
 			for (int i = 0; i < y_dimension; i++) {
 				if (cells[i][j].isOccupied()) {
-					System.out.print("[B] ");
+					System.out.print("["+cells[i][j].getOccupant().getID().charAt(0) +"] ");
 				} else if (cells[i][j].hasFood()) {
-					System.out.print("[F] ");
+					System.out.print("[*] ");
 				} else {
 					System.out.print("[ ] ");
 				}

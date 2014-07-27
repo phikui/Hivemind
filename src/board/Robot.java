@@ -36,15 +36,18 @@ public class Robot {
 		return health;
 	}
 
-	public Robot(Executable code) {
+	
+	public Robot(Executable code, String id){
 		variables = VariableMapGenerator.getNewVariableMap();
 		this.code = code;
 		energy = max_energy;
 		health = max_health;
-		SecureRandom random = new SecureRandom();
-		id = new BigInteger(50, random).toString(32);
+		this.id = id;
 		age=0;
+
 	}
+	
+	
 
 	protected void incrementAge(){
 		age++;
