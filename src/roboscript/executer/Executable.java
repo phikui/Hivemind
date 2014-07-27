@@ -49,7 +49,7 @@ public class Executable implements java.io.Serializable {
 	public void boxed_execute() {
 		console.clear();
 		try {
-			execute(VariableMapGenerator.getVariableMap());
+			execute(VariableMapGenerator.getNewVariableMap());
 		} catch (ExecuteException e) {
 			System.err.println(e.getMessage());
 			System.exit(0);
