@@ -17,12 +17,14 @@ public class Robot {
 	private Executable code;
 	protected HashMap<String, Expression> variables;
 	
+	private Cell position;
+	private int age;
+	
 	public HashMap<String, Expression> getVariables() {
 		return variables;
 	}
 
-	private Cell position;
-	private int age;
+	
 
 	protected Cell getPosition() {
 		return position;
@@ -47,14 +49,14 @@ public class Robot {
 		energy = max_energy;
 		health = max_health;
 		this.id = id;
-		age=0;
+		setAge(0);
 
 	}
 	
 	
 
 	protected void incrementAge(){
-		age++;
+		setAge(getAge() + 1);
 	}
 	public void gainEnergy(int amount) {
 		energy += amount;
@@ -77,6 +79,18 @@ public class Robot {
 	public void loseEnergy(int i) {
 		energy -= i;
 		
+	}
+
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+
+	private void setAge(int age) {
+		this.age = age;
 	}
 
 }

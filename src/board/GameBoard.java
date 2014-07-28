@@ -14,29 +14,58 @@ public class GameBoard {
 
 	private Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
-	private static final double runtimeModifier=1;
+	private static final double runtimeModifier = 1;
 	List<Robot> bots, deadBots;
 	Random rand;
 
 	public GameBoard(int m, int n, double p) {
+		System.out.print("Creating board...");
 		rand = new Random();
 		cells = new Cell[m][n];
 		numberOfCells = m * n;
 		x_dimension = m;
 		y_dimension = n;
-		initCells();
-		fillWithFood(p);
+		
 		bots = new ArrayList<Robot>();
 		deadBots = new ArrayList<Robot>();
 		Position.max_x = x_dimension - 1;
 		Position.max_y = y_dimension - 1;
+		
+		System.out.println( "done.");
+		System.out.println("init cells...");
+		initCells();
+		System.out.println( "done.");
+		
+		
+		
+		System.out.print("filling with food...");
+		fillWithFood(p);
+		System.out.println("done.");
+		
 	}
 
 	private void initCells() {
+		int total= x_dimension*y_dimension;
+		int amount=0;
+		double current_p =0;
+		double previous_p=0;
+		
+		
+		
+		System.out.println(Math.floor(current_p)+"%");
 		for (int i = 0; i < x_dimension; i++) {
 			for (int j = 0; j < y_dimension; j++) {
 				Position pos = new Position(i, j);
 				cells[i][j] = new Cell(pos);
+				amount++;
+				
+				
+				
+				current_p = ((double) amount)/ ((double) total)*100;
+				if(current_p >= (previous_p + 5)){
+				System.out.println(Math.floor(current_p)+"%");
+				previous_p = current_p;
+				}
 			}
 		}
 	}
@@ -59,8 +88,8 @@ public class GameBoard {
 	public void addRobotFromFile(String file) {
 		Executable code = ScriptCompiler.compile("./scripts/test2.rs");
 		String[] tokens = file.split("/");
-		
-		Robot bot = new Robot(code,tokens[tokens.length-1]);
+
+		Robot bot = new Robot(code, tokens[tokens.length - 1]);
 		addRobot(bot);
 	}
 
@@ -79,13 +108,38 @@ public class GameBoard {
 		bot.setPosition(cells[pos.x][pos.y]);
 	}
 
-	public void printBoard() {
+	public void printStatus(boolean printBoard, boolean printRobots) {
+		if (printBoard) {
+			printBoard();
+		}
+		System.out.println();
+		System.out.println();
+
+		if (printRobots) {
+			printRobots();
+		}
+	}
+
+	private void printRobots() {
+		System.out.println("List of Bots:");
+		System.out.println("id | energy | health | age");
+		if (!bots.isEmpty()) {
+			for (Robot bot : bots) {
+				System.out.println(bot.getID() + " | " + bot.getEnergy() + " | " + bot.getHealth() + " | "
+						+ bot.getAge());
+			}
+		} else {
+			System.out.println("no bots on board");
+		}
+	}
+
+	private void printBoard() {
 		System.out.println("[X]=Bot,*=Food");
 
 		for (int j = 0; j < x_dimension; j++) {
 			for (int i = 0; i < y_dimension; i++) {
 				if (cells[i][j].isOccupied()) {
-					System.out.print("["+cells[i][j].getOccupant().getID().charAt(0) +"] ");
+					System.out.print("[" + cells[i][j].getOccupant().getID().charAt(0) + "] ");
 				} else if (cells[i][j].hasFood()) {
 					System.out.print("[*] ");
 				} else {
@@ -94,16 +148,7 @@ public class GameBoard {
 			}
 			System.out.println();
 		}
-		System.out.println();
-		System.out.println();
-		System.out.println("List of Bots:");
-		if (!bots.isEmpty()) {
-			for (Robot bot : bots) {
-				System.out.println(bot.getID() + " Energy: " + bot.getEnergy());
-			}
-		} else {
-			System.out.println("no bots on board");
-		}
+
 	}
 
 	private Position findRandomEmptyPosition() {
@@ -146,7 +191,7 @@ public class GameBoard {
 				new_cell.addBot(bot);
 				bot.setPosition(new_cell);
 			} else {
-				//TODO attack move on new_cell with attack_strength
+				// TODO attack move on new_cell with attack_strength
 				deadBots.add(bot);
 			}
 		} else {
@@ -162,19 +207,18 @@ public class GameBoard {
 			executeTime = bot.execute();
 			// System.out.println("done executable");
 		} catch (ExecuteException e) {
-			System.out.println(bot.getID() +"exception: "+e.getMessage());
+			System.out.println(bot.getID() + "exception: " + e.getMessage());
 			deadBots.add(bot);
 			return;
 		}
 
-		double energyLoss = executeTime*runtimeModifier;
-		System.out.println("energy loss: "+energyLoss);
-		if(energyLoss < 1){
+		double energyLoss = executeTime * runtimeModifier;
+		System.out.println("energy loss: " + energyLoss);
+		if (energyLoss < 1) {
 			bot.loseEnergy(1);
 		} else {
 			bot.loseEnergy((int) energyLoss);
 		}
-		
 
 		if (bot.getEnergy() <= 0) {
 			deadBots.add(bot);
@@ -183,7 +227,7 @@ public class GameBoard {
 		int direction = InputOutput.getOutputMoveDirection(bot);
 		double attack_strength = InputOutput.getAttackStrength(bot);
 		System.out.println("!     new direction: " + Position.getCellName(direction));
-		moveRobot(bot, direction,attack_strength);
+		moveRobot(bot, direction, attack_strength);
 		bot.incrementAge();
 	}
 

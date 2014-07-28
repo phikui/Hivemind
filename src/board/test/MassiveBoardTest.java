@@ -2,7 +2,7 @@ package board.test;
 
 import board.GameBoard;
 
-public class BoardTest {
+public class MassiveBoardTest {
 
 	/**
 	 * @param args
@@ -10,14 +10,14 @@ public class BoardTest {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		GameBoard board = new GameBoard(11,11,0.3);
-		board.printStatus(true, false);
+
+		GameBoard board = new GameBoard(5000,5000,0.2);
 		board.addRobotFromFile("./scripts/test2.rs");
-		board.printStatus(true, true);
+		
 		
 		while(true){
 			board.executeRobots();
-			board.printStatus(true, true);
+			board.printStatus(false, true);
 			//System.out.println();
 			Thread.sleep(2000);
 		}
