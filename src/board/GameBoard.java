@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import roboscript.InputOutput;
 import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.parser.ScriptCompiler;
@@ -130,7 +131,7 @@ public class GameBoard {
 		cleanDeadRobots();
 	}
 
-	private void moveRobot(Robot bot, int direction) {
+	private void moveRobot(Robot bot, int direction, double attack_strength) {
 		if (direction == 0) {
 			return;
 		}
@@ -144,7 +145,7 @@ public class GameBoard {
 				new_cell.addBot(bot);
 				bot.setPosition(new_cell);
 			} else {
-				//TODO attack move on new_cell
+				//TODO attack move on new_cell with attack_strength
 				deadBots.add(bot);
 			}
 		} else {
@@ -171,9 +172,10 @@ public class GameBoard {
 			deadBots.add(bot);
 			return;
 		}
-		int x = rand.nextInt(9);
-		//System.out.println("new direction " + x);
-		moveRobot(bot, x);
+		int direction = InputOutput.getOutputMoveDirection(bot);
+		double attack_strength = InputOutput.getAttackStrength(bot);
+		System.out.println("!     new direction: " + Position.getCellName(direction));
+		moveRobot(bot, direction,attack_strength);
 		bot.incrementAge();
 	}
 

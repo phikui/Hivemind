@@ -16,6 +16,10 @@ public class Number implements Expression {
 	public Number(double number) {
 		m_number = number;
 	}
+	
+	public double getValue(){
+		return m_number;
+	}
 
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer) throws ExecuteException {
 		return m_number;

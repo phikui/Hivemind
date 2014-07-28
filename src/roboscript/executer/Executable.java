@@ -3,10 +3,11 @@ package roboscript.executer;
 import java.util.HashMap;
 import java.util.Stack;
 
+import roboscript.InputOutput;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.interpreter.exceptions.ValidExit;
 import roboscript.interpreter.expressions.Expression;
-
+import roboscript.interpreter.expressions.Number;
 public class Executable implements java.io.Serializable {
 	/**
 	 * 
@@ -63,7 +64,9 @@ public class Executable implements java.io.Serializable {
 		long currentExecutionTime = 0;
 		execution_stack.clear();
 		execution_stack.add(m_head);
-
+		//clear outputs
+		variables.put(InputOutput.getOutput().getProperty("move_direction"), new Number(0));
+		variables.put(InputOutput.getOutput().getProperty("atack_strength"), new Number(0));
 		while (!execution_stack.isEmpty()) {
 			currentExecutionTime = System.currentTimeMillis() - startTime;
 			if (currentExecutionTime > maxExecutionTime || variables.size() > maxVariableMapSize) {

@@ -6,6 +6,7 @@ import java.util.Properties;
 import roboscript.StringDefinitions;
 import roboscript.interpreter.expressions.Expression;
 import roboscript.interpreter.expressions.Number;
+import roboscript.interpreter.expressions.RandomDirection;
 import roboscript.interpreter.expressions.RandomNumber;
 
 public class VariableMapGenerator {
@@ -44,7 +45,10 @@ public class VariableMapGenerator {
 		variableMap.put(constants.getProperty("southwest"), new Number(6));
 		variableMap.put(constants.getProperty("south"), new Number(7));
 		variableMap.put(constants.getProperty("southeast"), new Number(8));
+		variableMap.put(constants.getProperty("random_direction"), new RandomDirection());
+		
 
+		
 		return variableMap;
 
 	}

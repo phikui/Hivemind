@@ -17,6 +17,11 @@ public class Robot {
 	private int health;
 	private Executable code;
 	protected HashMap<String, Expression> variables;
+	
+	public HashMap<String, Expression> getVariables() {
+		return variables;
+	}
+
 	private Cell position;
 	private int age;
 

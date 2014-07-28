@@ -61,4 +61,47 @@ public class Position {
 	public boolean isValid() {
 		return (x >= 0 && y >= 0 && x <= max_x && y <= max_y);
 	}
+	
+	public static String getCellName (int d){
+		String name="";
+		// Directions
+				/*
+				 * 1 2 3
+				 * 
+				 * 4 0 5
+				 * 
+				 * 6 7 8
+				 */
+
+				switch (d) {
+				case 1:
+					name = "NW";
+					break;
+				case 2:
+					name = "N";
+					break;
+				case 3:
+					name = "NE";
+					break;
+				case 4:
+					name = "W";
+					break;
+				case 5:
+					name = "E";
+					break;
+				case 6:
+					name = "SW";
+					break;
+				case 7:
+					name = "S";
+					break;
+				case 8:
+					name = "SE";
+					break;
+				default:
+					break;
+				}
+				
+				return name;
+	}
 }
