@@ -33,6 +33,8 @@ public class MassiveBoardTest {
 			// System.out.println();
 			Thread.sleep(2000);
 		}
+		
+		board.printHighScore();
 	}
 
 }

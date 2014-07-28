@@ -1,9 +1,13 @@
 package board;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import board.score.Score;
+import board.score.ScoreComparator;
 
 import roboscript.InputOutput;
 import roboscript.executer.Executable;
@@ -15,9 +19,10 @@ public class GameBoard {
 	private Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
 	private static final double runtimeModifier = 1;
-	List<Robot> bots, deadBots;
-	Random rand;
-	StringBuffer events;
+	private List<Robot> bots, deadBots;
+	private Random rand;
+	private StringBuffer events;
+	private List<Score> highScore;
 
 	protected Cell getCellFromPosition(Position pos) {
 		if (pos.isValid()) {
@@ -29,6 +34,7 @@ public class GameBoard {
 
 	public GameBoard(int m, int n, double p) {
 		System.out.println("Creating board of size " + m + "*" + n);
+		highScore = new ArrayList<Score>();
 		rand = new Random();
 		cells = new Cell[m][n];
 		numberOfCells = m * n;
@@ -219,6 +225,7 @@ public class GameBoard {
 		if (bot.getEnergy() > 0) {
 			bot.getPosition().addFood(new Food(bot.getEnergy(), bot.getPosition()));
 		}
+		highScore.add(new Score(bot.getID(), bot.getOrigin(), bot.getAge()));
 	}
 
 	private void moveRobot(Robot bot, int direction, int attack_strength) {
@@ -296,6 +303,15 @@ public class GameBoard {
 	public int getAlive() {
 
 		return bots.size();
+	}
+
+	public void printHighScore() {
+		Collections.sort(highScore, new ScoreComparator());
+		System.out.println("highscore:");
+		System.out.println("age | id | origin");
+		for (Score score : highScore) {
+			System.out.println(score.age + " | " + score.id + " | " + score.origin);
+		}
 	}
 
 }
