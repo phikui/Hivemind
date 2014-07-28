@@ -5,7 +5,6 @@ public class Cell {
 	private Robot occupant;
 	private Food food;
 	private Position pos;
-	
 
 	public Robot getOccupant() {
 		return occupant;
@@ -14,8 +13,8 @@ public class Cell {
 	public Cell(Position position) {
 		pos = position;
 	}
-	
-	protected void deleteOccupant(){
+
+	protected void deleteOccupant() {
 		occupant = null;
 	}
 
@@ -36,10 +35,12 @@ public class Cell {
 	}
 
 	public void addFood(Food food) {
-		this.food = food;
+		if (this.food == null) {
+			this.food = food;
+		} else {
+			this.food.increaseAmount(food.getAmount());
+		}
 	}
-
-	
 
 	public Position getPosition() {
 		return pos;

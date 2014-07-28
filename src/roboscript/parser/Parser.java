@@ -187,7 +187,7 @@ public class Parser {
 
 				// unary operators
 			} else if (token.equals("!") || token.equals("sqrt") || token.equals("abs") || token.equals("log")
-					|| token.equals("randi")) {
+					|| token.equals("randi") || token.equals("IS_VALID") || token.equals("HAS_FOOD") || token.equals("IS_OCCUPIED"))  {
 
 				if (has_rest) {
 					return new UnaryOperator(token, parseLine(restOfLine, null));

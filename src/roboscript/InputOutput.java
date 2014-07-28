@@ -28,11 +28,11 @@ public class InputOutput {
 
 	}
 	
-	public static double getAttackStrength(Robot bot){
+	public static int getAttackStrength(Robot bot){
 		String variableName = getOutput().getProperty("atack_strength");
 		Expression value = bot.getVariables().get(variableName);
 		if (value instanceof  Number){
-			return  ((Number) value).getValue();
+			return  (int) ((Number) value).getValue();
 		} else {
 			return -1;
 		}
