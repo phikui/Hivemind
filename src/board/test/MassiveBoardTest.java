@@ -11,7 +11,7 @@ public class MassiveBoardTest {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
-		GameBoard board = new GameBoard(5000,5000,0.2);
+		GameBoard board = new GameBoard(5000,5000,0.3);
 		board.addRobotFromFile("./scripts/test2.rs");
 		
 		
