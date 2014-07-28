@@ -14,6 +14,7 @@ public class GameBoard {
 
 	private Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
+	private static final double runtimeModifier=1;
 	List<Robot> bots, deadBots;
 	Random rand;
 
@@ -161,12 +162,19 @@ public class GameBoard {
 			executeTime = bot.execute();
 			// System.out.println("done executable");
 		} catch (ExecuteException e) {
+			System.out.println(bot.getID() +"exception: "+e.getMessage());
 			deadBots.add(bot);
 			return;
 		}
 
-		// TODO subtract energy according to runtime
-		bot.loseEnergy(10);
+		double energyLoss = executeTime*runtimeModifier;
+		System.out.println("energy loss: "+energyLoss);
+		if(energyLoss < 1){
+			bot.loseEnergy(1);
+		} else {
+			bot.loseEnergy((int) energyLoss);
+		}
+		
 
 		if (bot.getEnergy() <= 0) {
 			deadBots.add(bot);

@@ -15,7 +15,7 @@ public class Executable implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private static final long maxExecutionTime = 10 * 1000;
+	private static final long maxExecutionTime = 1 * 1000;
 	private static final long maxVariableMapSize = 100;
 
 	private Console console;
@@ -76,11 +76,13 @@ public class Executable implements java.io.Serializable {
 			try {
 				execution_stack.pop().evaluate(variables, execution_stack, this);
 			} catch (ValidExit e) {
+				currentExecutionTime = System.currentTimeMillis() - startTime;
 				return currentExecutionTime;
 			}
 
 		}
-		
+		currentExecutionTime = System.currentTimeMillis() - startTime;
+		System.out.println(currentExecutionTime);
 		return currentExecutionTime;
 	}
 
