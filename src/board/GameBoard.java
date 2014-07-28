@@ -2,10 +2,12 @@ package board;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import board.score.AccumulatedScore;
 import board.score.Score;
 import board.score.ScoreComparator;
 
@@ -311,6 +313,18 @@ public class GameBoard {
 		System.out.println("age | id | origin");
 		for (Score score : highScore) {
 			System.out.println(score.age + " | " + score.id + " | " + score.origin);
+		}
+	}
+
+	public void printAverageScore() {
+		HashMap<String, AccumulatedScore> acc_score = new HashMap<String, AccumulatedScore>();
+		for (Score score : highScore) {
+			acc_score.put(score.origin, new AccumulatedScore(score.origin, score.age));
+		}
+		System.out.println("origin | avarage age");
+		for (String key : acc_score.keySet()) {
+			AccumulatedScore score = acc_score.get(key);
+			System.out.println(score.origin + " | " + score.age);
 		}
 	}
 
