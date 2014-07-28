@@ -82,7 +82,6 @@ public class Executable implements java.io.Serializable {
 
 		}
 		currentExecutionTime = System.currentTimeMillis() - startTime;
-		System.out.println(currentExecutionTime);
 		return currentExecutionTime;
 	}
 

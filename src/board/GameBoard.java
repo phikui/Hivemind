@@ -18,10 +18,10 @@ public class GameBoard {
 	List<Robot> bots, deadBots;
 	Random rand;
 	StringBuffer events;
-	
-	protected Cell getCellFromPosition(Position pos){
-		if(pos.isValid()){
-		return cells[pos.x][pos.y];
+
+	protected Cell getCellFromPosition(Position pos) {
+		if (pos.isValid()) {
+			return cells[pos.x][pos.y];
 		} else {
 			return null;
 		}
@@ -147,8 +147,10 @@ public class GameBoard {
 		}
 
 		if (printEvents) {
-			System.out.println(events.toString());
-			events = new StringBuffer();
+			if (events.length() > 0) {
+				System.out.println(events.toString());
+				events = new StringBuffer();
+			}
 		}
 	}
 
