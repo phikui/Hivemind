@@ -1,3 +1,1 @@
-peter = 1;
-peter = peter % 2;
-print peter;
+print HAS_FOOD 8;

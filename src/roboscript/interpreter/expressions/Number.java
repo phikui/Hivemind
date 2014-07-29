@@ -24,4 +24,7 @@ public class Number implements Expression {
 	public double evaluate(HashMap<String, Expression> variables, Collection<Expression> executeStack, Executable executer) throws ExecuteException {
 		return m_number;
 	}
+	public String toString(){
+		return ""+m_number;
+	}
 }

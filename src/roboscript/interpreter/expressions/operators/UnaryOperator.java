@@ -8,8 +8,10 @@ import board.Position;
 
 import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
+import roboscript.interpreter.exceptions.SyntaxException;
 import roboscript.interpreter.exceptions.ValidExit;
 import roboscript.interpreter.expressions.Expression;
+import roboscript.interpreter.expressions.variables.Variable;
 
 public class UnaryOperator implements Expression {
 
@@ -52,8 +54,13 @@ public class UnaryOperator implements Expression {
 			result = variables.get("IS_OCCUPIED_" + Position.getCellName((int) a)).evaluate(variables, executeStack,
 					executer);
 		} else if (m_operator.equals("HAS_FOOD")) {
-			result = variables.get("HAS_FOOD_" + Position.getCellName((int) a)).evaluate(variables, executeStack,
-					executer);
+			try {
+				result = new Variable("HAS_FOOD_" + Position.getCellName((int) a)).evaluate(variables, executeStack,
+						executer);
+			} catch (SyntaxException e) {
+				throw new ExecuteException("illegal argument for HAS_FOOD");
+			}
+
 		}
 
 		return result;

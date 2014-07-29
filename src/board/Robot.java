@@ -43,16 +43,16 @@ public class Robot {
 	}
 
 	public void setVariables(GameBoard board) {
-
+		variables.put("MOVE_DIRECTION", new Number(0));
 		// for every possible direction
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 9; i++) {
 			String name = Position.getCellName(i);
 
 			// variables for valid positions
 			int value;
 			Position newPos = position.getPosition().move(i);
 			Cell newCell = board.getCellFromPosition(newPos);
-			if (newPos.isValid()) {
+			if (newPos.isValid(board)) {
 				value = 1;
 			} else {
 				value = 0;
@@ -61,7 +61,7 @@ public class Robot {
 			
 
 			// variables for is occupied
-			if ((!(newCell == null)) && newCell.isOccupied()) {
+			if ((newCell != null) && newCell.isOccupied()) {
 				value = 1;
 			} else {
 				value = 0;
@@ -69,7 +69,7 @@ public class Robot {
 			variables.put("IS_OCCUPIED_" + name, new Number(value));
 			
 
-			if ((!(newCell == null)) && newCell.hasFood()) {
+			if ((newCell != null) && newCell.hasFood()) {
 				value = 1;
 			} else {
 				value = 0;
@@ -78,6 +78,8 @@ public class Robot {
 			variables.put("HAS_FOOD_" + name, new Number(value));
 
 		}
+		System.out.println(variables);
+		System.out.println();
 	}
 
 	public Robot(Executable code, String id) {
@@ -111,7 +113,9 @@ public class Robot {
 	}
 
 	public long execute() throws ExecuteException {
-		return code.execute(variables);
+		long runtime = code.execute(variables);
+		System.out.println("variable direction: "+variables.get("MOVE_DIRECTION"));
+		return runtime;
 	}
 
 	public void loseEnergy(int i) {

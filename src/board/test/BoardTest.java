@@ -6,19 +6,21 @@ public class BoardTest {
 
 	/**
 	 * @param args
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		GameBoard board = new GameBoard(11,11,0.3);
+		GameBoard board = new GameBoard(40, 40, 0.3);
 		board.printStatus(true, false, true);
-		board.addRobotFromFile("./scripts/test2.rs");
+		 board.addRobotFromFile("./scripts/random_foodcheck.rs");
+		//board.addMultipleBots(new String[] { "./scripts/random_foodcheck.rs", "./scripts/test2.rs" }, 5);
+
 		board.printStatus(true, true, true);
-		
-		while(true){
+
+		while (true) {
 			board.executeRobots();
 			board.printStatus(true, true, true);
-			//System.out.println();
+			// System.out.println();
 			Thread.sleep(2000);
 		}
 	}

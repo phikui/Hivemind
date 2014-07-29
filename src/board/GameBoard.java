@@ -18,7 +18,7 @@ import roboscript.parser.ScriptCompiler;
 
 public class GameBoard {
 
-	private Cell[][] cells;
+	protected Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
 	private static final double runtimeModifier = 1;
 	private List<Robot> bots, deadBots;
@@ -27,10 +27,18 @@ public class GameBoard {
 	private List<Score> highScore;
 
 	protected Cell getCellFromPosition(Position pos) {
-		if (pos.isValid()) {
+		if (pos.isValid(this)) {
 			return cells[pos.x][pos.y];
 		} else {
 			return null;
+		}
+	}
+
+	public void addMultipleBots(String[] bots, int swarmSize) {
+		for (int i = 0; i < bots.length; i++) {
+			for (int j = 0; j < swarmSize; j++) {
+				addRobotFromFile(bots[i]);
+			}
 		}
 	}
 
@@ -54,6 +62,12 @@ public class GameBoard {
 		initCells();
 		System.out.println("done.");
 
+		System.out.print("creating some canyons...");
+		for (int i = 0; i < 5; i++) {
+			generateCanyons((int) (0.3 * n * m), 3, findRandomEmptyPosition());
+		}
+		System.out.println(" done.");
+
 		System.out.println("filling with food...");
 		fillWithFood(p);
 		System.out.println("done.");
@@ -62,6 +76,17 @@ public class GameBoard {
 		System.out.println();
 		System.out.println();
 
+	}
+
+	private void generateCanyons(int length, int width, Position start) {
+		Position pos = start;
+		List<Position> path = pos.getRandomPath(30, this);
+		List<Position> destroy = new ArrayList<Position>();
+		for (Position x : path) {
+			destroy.add(x);
+			destroy.addAll(x.get_k_neighborhood(this, 1));
+		}
+		destroyCells(destroy);
 	}
 
 	private void initCells() {
@@ -105,23 +130,28 @@ public class GameBoard {
 
 			int random_x = rand.nextInt(x_dimension);
 			int random_y = rand.nextInt(y_dimension);
-			cells[random_x][random_y].addFood(new Food(20, cells[random_x][random_y]));
-			toFill--;
+			if (new Position(random_x, random_y).isValid(this)) {
+				cells[random_x][random_y].addFood(new Food(20, cells[random_x][random_y]));
+				toFill--;
 
-			// for progress calculation ____________
-			amount++;
-			current_p = ((double) amount) / ((double) total) * 100;
-			if (current_p >= (previous_p + 5)) {
-				System.out.println(Math.floor(current_p) + "%");
-				previous_p = current_p;
+				// for progress calculation ____________
+				amount++;
+				current_p = ((double) amount) / ((double) total) * 100;
+				if (current_p >= (previous_p + 5)) {
+					System.out.println(Math.floor(current_p) + "%");
+					previous_p = current_p;
+				}
+				// _____________________________________
 			}
-			// _____________________________________
 		}
 
 	}
 
 	public void addRobotFromFile(String file) {
 		Executable code = ScriptCompiler.compile("./scripts/test2.rs");
+		if (code == null) {
+			return;
+		}
 		String[] tokens = file.split("/");
 
 		Robot bot = new Robot(code, tokens[tokens.length - 1]);
@@ -180,12 +210,16 @@ public class GameBoard {
 
 		for (int j = 0; j < x_dimension; j++) {
 			for (int i = 0; i < y_dimension; i++) {
-				if (cells[i][j].isOccupied()) {
-					System.out.print("[" + cells[i][j].getOccupant().getID().charAt(0) + "] ");
-				} else if (cells[i][j].hasFood()) {
-					System.out.print("[*] ");
+				if (cells[i][j] != null) {
+					if (cells[i][j].isOccupied()) {
+						System.out.print("[" + cells[i][j].getOccupant().getID().charAt(0) + "] ");
+					} else if (cells[i][j].hasFood()) {
+						System.out.print("[*] ");
+					} else {
+						System.out.print("[ ] ");
+					}
 				} else {
-					System.out.print("[ ] ");
+					System.out.print("    ");
 				}
 			}
 			System.out.println();
@@ -200,9 +234,11 @@ public class GameBoard {
 			int random_x = rand.nextInt(x_dimension);
 			int random_y = rand.nextInt(y_dimension);
 
-			if (!cells[random_x][random_y].hasFood() && !cells[random_x][random_y].isOccupied()) {
-				done = true;
-				pos = new Position(random_x, random_y);
+			if (cells[random_x][random_y] != null) {
+				if (!cells[random_x][random_y].hasFood() && !cells[random_x][random_y].isOccupied()) {
+					done = true;
+					pos = new Position(random_x, random_y);
+				}
 			}
 
 		}
@@ -237,7 +273,7 @@ public class GameBoard {
 		Position old_pos = bot.getPosition().getPosition();
 		Position new_pos = old_pos.move(direction);
 
-		if (new_pos.isValid()) {
+		if (new_pos.isValid(this)) {
 			Cell new_cell = cells[new_pos.x][new_pos.y];
 			if (!new_cell.isOccupied()) {
 				cells[old_pos.x][old_pos.y].deleteOccupant();
@@ -297,6 +333,7 @@ public class GameBoard {
 		}
 
 		int direction = InputOutput.getOutputMoveDirection(bot);
+		System.out.println("direction: "+Position.getCellName(direction));
 		int attack_strength = InputOutput.getAttackStrength(bot);
 		moveRobot(bot, direction, attack_strength);
 		bot.incrementAge();
@@ -325,6 +362,12 @@ public class GameBoard {
 		for (String key : acc_score.keySet()) {
 			AccumulatedScore score = acc_score.get(key);
 			System.out.println(score.origin + " | " + score.age);
+		}
+	}
+
+	public void destroyCells(List<Position> list) {
+		for (Position pos : list) {
+			cells[pos.x][pos.y] = null;
 		}
 	}
 

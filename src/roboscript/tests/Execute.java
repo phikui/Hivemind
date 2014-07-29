@@ -11,7 +11,7 @@ public class Execute {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Executable x = ScriptCompiler.compile("./scripts/test2.rs");
+		Executable x = ScriptCompiler.compile("./scripts/test3.rs");
 		x.boxed_execute();
 		System.out.println(x.getConsole().toString());
 	}
