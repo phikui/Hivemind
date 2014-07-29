@@ -1,1 +1,1 @@
-print HAS_FOOD 8;
+print 8;

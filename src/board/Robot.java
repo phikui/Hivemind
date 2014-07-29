@@ -43,7 +43,7 @@ public class Robot {
 	}
 
 	public void setVariables(GameBoard board) {
-		variables.put("MOVE_DIRECTION", new Number(0));
+		variables.put("MOVE_DIRECTION", new Number(-1));
 		// for every possible direction
 		for (int i = 0; i < 9; i++) {
 			String name = Position.getCellName(i);
@@ -78,8 +78,7 @@ public class Robot {
 			variables.put("HAS_FOOD_" + name, new Number(value));
 
 		}
-		System.out.println(variables);
-		System.out.println();
+		
 	}
 
 	public Robot(Executable code, String id) {
@@ -113,8 +112,11 @@ public class Robot {
 	}
 
 	public long execute() throws ExecuteException {
+		
+		
 		long runtime = code.execute(variables);
-		System.out.println("variable direction: "+variables.get("MOVE_DIRECTION"));
+		
+
 		return runtime;
 	}
 

@@ -60,20 +60,22 @@ public class Executable implements java.io.Serializable {
 
 	// execute without exception handling
 	public long execute(HashMap<String, Expression> variables) throws ExecuteException {
+		console.clear();
 		long startTime = System.currentTimeMillis();
 		long currentExecutionTime = 0;
 		execution_stack.clear();
 		execution_stack.add(m_head);
 		//clear outputs
-		variables.put(InputOutput.getOutput().getProperty("move_direction"), new Number(0));
+		variables.put(InputOutput.getOutput().getProperty("move_direction"), new Number(-1));
 		variables.put(InputOutput.getOutput().getProperty("atack_strength"), new Number(0));
 		while (!execution_stack.isEmpty()) {
 			currentExecutionTime = System.currentTimeMillis() - startTime;
 			if (currentExecutionTime > maxExecutionTime || variables.size() > maxVariableMapSize) {
-				throw new ExecuteException("Exceeded maximum execution time of " + (maxExecutionTime / 1000)
-						+ " seconds");
+				//throw new ExecuteException("Exceeded maximum execution time of " + (maxExecutionTime / 1000)
+				//		+ " seconds");
 			}
 			try {
+				
 				execution_stack.pop().evaluate(variables, execution_stack, this);
 			} catch (ValidExit e) {
 				currentExecutionTime = System.currentTimeMillis() - startTime;

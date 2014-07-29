@@ -10,6 +10,7 @@ import java.util.Set;
 import board.score.AccumulatedScore;
 import board.score.Score;
 import board.score.ScoreComparator;
+import board.util.Progress;
 
 import roboscript.InputOutput;
 import roboscript.executer.Executable;
@@ -35,9 +36,13 @@ public class GameBoard {
 	}
 
 	public void addMultipleBots(String[] bots, int swarmSize) {
+		System.out.println("adding bots: ");
+		Progress p = new Progress(bots.length*swarmSize,10);
 		for (int i = 0; i < bots.length; i++) {
 			for (int j = 0; j < swarmSize; j++) {
 				addRobotFromFile(bots[i]);
+				p.increment(1);
+				p.printProgress();
 			}
 		}
 	}
@@ -148,7 +153,7 @@ public class GameBoard {
 	}
 
 	public void addRobotFromFile(String file) {
-		Executable code = ScriptCompiler.compile("./scripts/test2.rs");
+		Executable code = ScriptCompiler.compile(file);
 		if (code == null) {
 			return;
 		}
@@ -333,7 +338,7 @@ public class GameBoard {
 		}
 
 		int direction = InputOutput.getOutputMoveDirection(bot);
-		System.out.println("direction: "+Position.getCellName(direction));
+		//System.out.println("direction: " + Position.getCellName(direction));
 		int attack_strength = InputOutput.getAttackStrength(bot);
 		moveRobot(bot, direction, attack_strength);
 		bot.incrementAge();
@@ -367,7 +372,9 @@ public class GameBoard {
 
 	public void destroyCells(List<Position> list) {
 		for (Position pos : list) {
-			cells[pos.x][pos.y] = null;
+			if (pos.isValid(this)) {
+				cells[pos.x][pos.y] = null;
+			}
 		}
 	}
 

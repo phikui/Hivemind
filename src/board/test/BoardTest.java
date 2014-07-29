@@ -12,7 +12,7 @@ public class BoardTest {
 		// TODO Auto-generated method stub
 		GameBoard board = new GameBoard(40, 40, 0.3);
 		board.printStatus(true, false, true);
-		 board.addRobotFromFile("./scripts/random_foodcheck.rs");
+		 board.addRobotFromFile("./scripts/random_valid_direction.rs");
 		//board.addMultipleBots(new String[] { "./scripts/random_foodcheck.rs", "./scripts/test2.rs" }, 5);
 
 		board.printStatus(true, true, true);
