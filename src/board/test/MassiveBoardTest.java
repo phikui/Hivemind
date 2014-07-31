@@ -12,17 +12,17 @@ public class MassiveBoardTest {
 		// TODO Auto-generated method stub
 
 		GameBoard board = new GameBoard(5000, 5000, 0.4);
-		int swarmSize=1000;
+		int swarmSize=100;
 		String one = "./scripts/random_valid_direction.rs";
 		String two = "./scripts/random_direction.rs";
 		String three = "./scripts/random_foodcheck.rs";
 		
-		System.out.println("adding bots");
+		
 		board.addMultipleBots(new String[]{one,two,three}, swarmSize);
-		System.out.println("done.");
+	
 		while (true) {
 			board.executeRobots();
-			board.printStatus(false, true, true);
+			board.printStatus(false, false, false);
 			if (board.getAlive() == 0) {
 				break;
 			}
@@ -30,7 +30,7 @@ public class MassiveBoardTest {
 			//Thread.sleep(2000);
 		}
 		
-		board.printHighScore();
+		board.printHighScoreTopN(20);
 		System.out.println();
 		System.out.println();
 		board.printAverageScore();

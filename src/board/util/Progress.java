@@ -20,7 +20,7 @@ public class Progress {
 
 	public void printProgress() {
 		if (current >= (previous + steps)) {
-			System.out.println(Math.floor(current) + "%");
+			System.out.println(((int)Math.floor(current)) + "%");
 			previous = current;
 		}
 	}

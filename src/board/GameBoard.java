@@ -26,6 +26,7 @@ public class GameBoard {
 	private Random rand;
 	private StringBuffer events;
 	private List<Score> highScore;
+	private int age;
 
 	protected Cell getCellFromPosition(Position pos) {
 		if (pos.isValid(this)) {
@@ -37,7 +38,7 @@ public class GameBoard {
 
 	public void addMultipleBots(String[] bots, int swarmSize) {
 		System.out.println("adding bots: ");
-		Progress p = new Progress(bots.length*swarmSize,10);
+		Progress p = new Progress(bots.length * swarmSize, 5);
 		for (int i = 0; i < bots.length; i++) {
 			for (int j = 0; j < swarmSize; j++) {
 				addRobotFromFile(bots[i]);
@@ -45,10 +46,24 @@ public class GameBoard {
 				p.printProgress();
 			}
 		}
+		System.out.println("done.");
+	}
+	
+	private int countNonNullCells(){
+		int result =0;
+		for (int i = 0; i < x_dimension; i++) {
+			for (int j = 0; j < y_dimension; j++) {
+				if(cells[i][j] != null){
+					result++;
+				}
+			}
+			}
+		return result;
 	}
 
 	public GameBoard(int m, int n, double p) {
 		System.out.println("Creating board of size " + m + "*" + n);
+		age = 0;
 		highScore = new ArrayList<Score>();
 		rand = new Random();
 		cells = new Cell[m][n];
@@ -73,6 +88,8 @@ public class GameBoard {
 		}
 		System.out.println(" done.");
 
+		numberOfCells = countNonNullCells();
+		
 		System.out.println("filling with food...");
 		fillWithFood(p);
 		System.out.println("done.");
@@ -95,27 +112,17 @@ public class GameBoard {
 	}
 
 	private void initCells() {
-		// for progress calculation ____________
 		int total = x_dimension * y_dimension;
-		int amount = 0;
-		double current_p = 0;
-		double previous_p = 0;
-		// _____________________________________
+		Progress p = new Progress(total, 5);
 
-		System.out.println(Math.floor(current_p) + "%");
 		for (int i = 0; i < x_dimension; i++) {
 			for (int j = 0; j < y_dimension; j++) {
 				Position pos = new Position(i, j);
 				cells[i][j] = new Cell(pos);
 
-				// for progress calculation ____________
-				amount++;
-				current_p = ((double) amount) / ((double) total) * 100;
-				if (current_p >= (previous_p + 5)) {
-					System.out.println(Math.floor(current_p) + "%");
-					previous_p = current_p;
-				}
-				// _____________________________________
+				p.increment(1);
+
+				p.printProgress();
 			}
 		}
 	}
@@ -123,13 +130,7 @@ public class GameBoard {
 	// fill percentage many cells with food
 	private void fillWithFood(double percentage) {
 		int toFill = (int) Math.floor(numberOfCells * percentage);
-
-		// for progress calculation ____________
-		int total = toFill;
-		int amount = 0;
-		double current_p = 0;
-		double previous_p = 0;
-		// _____________________________________
+		Progress p = new Progress(toFill, 5);
 
 		while (toFill > 0) {
 
@@ -139,14 +140,9 @@ public class GameBoard {
 				cells[random_x][random_y].addFood(new Food(20, cells[random_x][random_y]));
 				toFill--;
 
-				// for progress calculation ____________
-				amount++;
-				current_p = ((double) amount) / ((double) total) * 100;
-				if (current_p >= (previous_p + 5)) {
-					System.out.println(Math.floor(current_p) + "%");
-					previous_p = current_p;
-				}
-				// _____________________________________
+				p.increment(1);
+				p.printProgress();
+
 			}
 		}
 
@@ -179,20 +175,25 @@ public class GameBoard {
 	}
 
 	public void printStatus(boolean printBoard, boolean printRobots, boolean printEvents) {
+		System.out.println("Age: " + age + "   Bots alive: " + bots.size());
 		if (printBoard) {
 			printBoard();
+			System.out.println();
+			
 		}
-		System.out.println();
-		System.out.println();
+		
+		
 
 		if (printRobots) {
 			printRobots();
+			System.out.println();
 		}
 
 		if (printEvents) {
 			if (events.length() > 0) {
 				System.out.println(events.toString());
 				events = new StringBuffer();
+				System.out.println();
 			}
 		}
 	}
@@ -258,7 +259,7 @@ public class GameBoard {
 			executeRobot(bot);
 		}
 		cleanDeadRobots();
-
+		age++;
 	}
 
 	private void killBot(Robot bot, String reason) {
@@ -338,7 +339,7 @@ public class GameBoard {
 		}
 
 		int direction = InputOutput.getOutputMoveDirection(bot);
-		//System.out.println("direction: " + Position.getCellName(direction));
+		// System.out.println("direction: " + Position.getCellName(direction));
 		int attack_strength = InputOutput.getAttackStrength(bot);
 		moveRobot(bot, direction, attack_strength);
 		bot.incrementAge();
@@ -347,6 +348,17 @@ public class GameBoard {
 	public int getAlive() {
 
 		return bots.size();
+	}
+	
+	public void printHighScoreTopN(int n){
+		n = Math.min(n, highScore.size());
+		Collections.sort(highScore, new ScoreComparator());
+		System.out.println("highscore:");
+		System.out.println("age | id | origin");
+		for(int i=0;i<n;i++){
+			Score score = highScore.get(i);
+			System.out.println(score.age + " | " + score.id + " | " + score.origin);
+		}
 	}
 
 	public void printHighScore() {
