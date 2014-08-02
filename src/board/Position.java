@@ -3,7 +3,8 @@ package board;
 import java.util.ArrayList;
 import java.util.List;
 
-import board.util.IntervalSampler;
+import util.IntervalSampler;
+
 
 public class Position {
 	public int x, y;

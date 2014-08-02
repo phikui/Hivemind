@@ -10,17 +10,19 @@ import java.util.Set;
 import board.score.AccumulatedScore;
 import board.score.Score;
 import board.score.ScoreComparator;
-import board.util.Progress;
 
 import roboscript.InputOutput;
 import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
 import roboscript.parser.ScriptCompiler;
+import util.Progress;
 
 public class GameBoard {
 
 	protected Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
+	
+
 	private static final double runtimeModifier = 1;
 	private List<Robot> bots, deadBots;
 	private Random rand;
@@ -28,6 +30,26 @@ public class GameBoard {
 	private List<Score> highScore;
 	private int age;
 
+	
+	
+
+
+	public int getNumberOfCells() {
+		return numberOfCells;
+	}
+
+	public int getX_dimension() {
+		return x_dimension;
+	}
+
+	public Cell[][] getCells() {
+		return cells;
+	}
+
+	public int getY_dimension() {
+		return y_dimension;
+	}
+	
 	protected Cell getCellFromPosition(Position pos) {
 		if (pos.isValid(this)) {
 			return cells[pos.x][pos.y];
@@ -36,6 +58,10 @@ public class GameBoard {
 		}
 	}
 
+	public int getAge() {
+		return age;
+	}
+	
 	public void addMultipleBots(String[] bots, int swarmSize) {
 		System.out.println("adding bots: ");
 		Progress p = new Progress(bots.length * swarmSize, 5);

@@ -3,7 +3,8 @@ package board.test;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-import board.util.IntervalSampler;
+import util.IntervalSampler;
+
 
 public class RandomString {
 

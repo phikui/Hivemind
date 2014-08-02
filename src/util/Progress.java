@@ -1,4 +1,4 @@
-package board.util;
+package util;
 
 public class Progress {
 

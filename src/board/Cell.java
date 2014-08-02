@@ -5,6 +5,7 @@ public class Cell {
 	private Robot occupant;
 	private Food food;
 	private Position pos;
+	private boolean needsRepaint;
 
 	public Robot getOccupant() {
 		return occupant;
@@ -12,10 +13,12 @@ public class Cell {
 
 	public Cell(Position position) {
 		pos = position;
+		needsRepaint = true;
 	}
 
 	protected void deleteOccupant() {
 		occupant = null;
+		needsRepaint = true;
 	}
 
 	protected void addBot(Robot bot) {
@@ -24,6 +27,7 @@ public class Cell {
 			occupant.gainEnergy(food.getAmount());
 			food = null;
 		}
+		needsRepaint = true;
 	}
 
 	public boolean isOccupied() {
@@ -40,6 +44,7 @@ public class Cell {
 		} else {
 			this.food.increaseAmount(food.getAmount());
 		}
+		needsRepaint = true;
 	}
 
 	public Position getPosition() {
@@ -48,5 +53,14 @@ public class Cell {
 
 	public void removeOccupant() {
 		occupant = null;
+		needsRepaint = true;
+	}
+
+	public boolean needsRepaint() {
+		return needsRepaint;
+	}
+	
+	public void wasPainted(){
+		needsRepaint = false;
 	}
 }

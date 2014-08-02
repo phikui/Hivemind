@@ -1,6 +1,7 @@
 package board.test;
 
 import board.GameBoard;
+import board.gui.Renderer;
 
 public class MassiveBoardTest {
 
@@ -11,7 +12,8 @@ public class MassiveBoardTest {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
-		GameBoard board = new GameBoard(5000, 5000, 0.4);
+		GameBoard board = new GameBoard(180, 100, 0.2);
+		Renderer renderer = new Renderer(board,10,10);
 		int swarmSize=100;
 		String one = "./scripts/random_valid_direction.rs";
 		String two = "./scripts/random_direction.rs";
@@ -20,6 +22,9 @@ public class MassiveBoardTest {
 		
 		board.addMultipleBots(new String[]{one,two,three}, swarmSize);
 	
+		
+		 renderer.start();
+		
 		while (true) {
 			board.executeRobots();
 			board.printStatus(false, false, false);
@@ -27,13 +32,14 @@ public class MassiveBoardTest {
 				break;
 			}
 			// System.out.println();
-			//Thread.sleep(2000);
+			Thread.sleep(1000);
 		}
 		
 		board.printHighScoreTopN(20);
 		System.out.println();
 		System.out.println();
 		board.printAverageScore();
+		renderer.done();
 	}
 
 }
