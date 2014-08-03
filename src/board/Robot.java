@@ -11,6 +11,7 @@ import roboscript.interpreter.expressions.Expression;
 public class Robot {
 	private static final int max_energy = 100;
 	private static final int max_health = 100;
+	private static final int default_energy_loss = 1;
 	private static int counter;
 	private final String origin;
 	private String unique_id;
@@ -131,6 +132,10 @@ public class Robot {
 
 	private void setAge(int age) {
 		this.age = age;
+	}
+
+	protected int getDefaultEnergyLoss() {
+		return default_energy_loss;
 	}
 
 	public void loseHealth(int damage) {

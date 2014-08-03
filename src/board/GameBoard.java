@@ -163,7 +163,7 @@ public class GameBoard {
 			int random_x = rand.nextInt(x_dimension);
 			int random_y = rand.nextInt(y_dimension);
 			if (new Position(random_x, random_y).isValid(this)) {
-				cells[random_x][random_y].addFood(new Food(20, cells[random_x][random_y]));
+				cells[random_x][random_y].addFood(new Food(10, cells[random_x][random_y]));
 				toFill--;
 
 				p.increment(1);
@@ -351,13 +351,7 @@ public class GameBoard {
 			return;
 		}
 
-		double energyLoss = executeTime * runtimeModifier;
-
-		if (energyLoss < 10) {
-			bot.loseEnergy(10);
-		} else {
-			bot.loseEnergy((int) energyLoss);
-		}
+		bot.loseEnergy(bot.getDefaultEnergyLoss());
 
 		if (bot.getEnergy() <= 0) {
 			killBot(bot, "Energy <= 0");

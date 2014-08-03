@@ -32,6 +32,7 @@ public class Renderer extends Thread {
 		frame.setBackground(Color.WHITE);
 		frame.setResizable(false);
 		frame.setVisible(true);
+		frame.setLocation(5000, 5000);
 		frame.setIgnoreRepaint(true);
 		boolean success = false;
 		do {
@@ -45,6 +46,7 @@ public class Renderer extends Thread {
 	}
 
 	private void paintBoard() {
+		frame.setLocation(0, 0);
 		BufferStrategy bufferStrategy = frame.getBufferStrategy();
 		Graphics g = bufferStrategy.getDrawGraphics();
 
