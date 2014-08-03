@@ -12,9 +12,9 @@ public class MassiveBoardTest {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
-		GameBoard board = new GameBoard(180, 100, 0.2);
-		Renderer renderer = new Renderer(board,10,10);
-		int swarmSize=100;
+		GameBoard board = new GameBoard(1000, 350, 0.2);
+		Renderer renderer = new Renderer(board,2,-1);
+		int swarmSize=1000;
 		String one = "./scripts/random_valid_direction.rs";
 		String two = "./scripts/random_direction.rs";
 		String three = "./scripts/random_foodcheck.rs";
@@ -32,7 +32,7 @@ public class MassiveBoardTest {
 				break;
 			}
 			// System.out.println();
-			Thread.sleep(1000);
+			Thread.sleep(300);
 		}
 		
 		board.printHighScoreTopN(20);

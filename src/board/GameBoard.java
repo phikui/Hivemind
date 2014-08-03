@@ -380,7 +380,7 @@ public class GameBoard {
 		n = Math.min(n, highScore.size());
 		Collections.sort(highScore, new ScoreComparator());
 		System.out.println("highscore:");
-		System.out.println("age | id | origin");
+		System.out.println("age| id | origin");
 		for(int i=0;i<n;i++){
 			Score score = highScore.get(i);
 			System.out.println(score.age + " | " + score.id + " | " + score.origin);
@@ -388,12 +388,7 @@ public class GameBoard {
 	}
 
 	public void printHighScore() {
-		Collections.sort(highScore, new ScoreComparator());
-		System.out.println("highscore:");
-		System.out.println("age | id | origin");
-		for (Score score : highScore) {
-			System.out.println(score.age + " | " + score.id + " | " + score.origin);
-		}
+		printHighScoreTopN(highScore.size());
 	}
 
 	public void printAverageScore() {
