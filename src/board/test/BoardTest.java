@@ -21,7 +21,7 @@ public class BoardTest {
 		 board.addRobotFromFile("./scripts/random_direction.rs",Color.GRAY);
 		//board.addMultipleBots(new String[] { "./scripts/random_foodcheck.rs", "./scripts/test2.rs" }, 5);
 
-		 Renderer renderer = new Renderer(board,10,30);
+		 Renderer renderer = new Renderer(board,15,30);
 		 renderer.start();
 		board.printStatus(false, true, true);
 

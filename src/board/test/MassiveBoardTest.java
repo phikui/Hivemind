@@ -31,7 +31,7 @@ public class MassiveBoardTest {
 				break;
 			}
 			// System.out.println();
-			Thread.sleep(10);
+			Thread.sleep(100);
 		}
 
 		board.printHighScoreTopN(10);

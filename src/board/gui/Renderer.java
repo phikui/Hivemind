@@ -89,7 +89,9 @@ public class Renderer extends Thread {
 		long lastupdate = 0;
 		long now=0;
 		long timer = 1;
-
+		long secondTimer = System.currentTimeMillis(); //to check if whole second has passed
+		int frameCounter = 0;
+		
 		while (!done) {
 			frame.setTitle("Age: " + board.getAge() + "    fps: " + real_ups);
 			now = System.currentTimeMillis();
@@ -99,8 +101,8 @@ public class Renderer extends Thread {
 										// passed
 				// System.out.println("update!");
 				paintBoard();
-				timer = now - lastupdate;
-				real_ups =  (int) (1000/timer);
+				frameCounter++;
+				
 				
 				frame.setTitle("Age: " + board.getAge() + "    fps: " + real_ups);
 				
@@ -113,6 +115,14 @@ public class Renderer extends Thread {
 					e.printStackTrace();
 				}
 			}
+			
+			//calculate real fps:
+			if(System.currentTimeMillis()>secondTimer+1000){
+				real_ups = frameCounter;
+				frameCounter = 0;
+				secondTimer = System.currentTimeMillis();
+			}
+			
 
 		}
 		frame.setVisible(false);
