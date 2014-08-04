@@ -21,7 +21,6 @@ public class GameBoard {
 
 	protected Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
-	
 
 	private static final double runtimeModifier = 1;
 	private List<Robot> bots, deadBots;
@@ -29,10 +28,6 @@ public class GameBoard {
 	private StringBuffer events;
 	private List<Score> highScore;
 	private int age;
-
-	
-	
-
 
 	public int getNumberOfCells() {
 		return numberOfCells;
@@ -49,7 +44,7 @@ public class GameBoard {
 	public int getY_dimension() {
 		return y_dimension;
 	}
-	
+
 	protected Cell getCellFromPosition(Position pos) {
 		if (pos.isValid(this)) {
 			return cells[pos.x][pos.y];
@@ -61,7 +56,7 @@ public class GameBoard {
 	public int getAge() {
 		return age;
 	}
-	
+
 	public void addMultipleBots(String[] bots, int swarmSize) {
 		System.out.println("adding bots: ");
 		Progress p = new Progress(bots.length * swarmSize, "Adding Bots");
@@ -69,21 +64,21 @@ public class GameBoard {
 			for (int j = 0; j < swarmSize; j++) {
 				addRobotFromFile(bots[i]);
 				p.increment(1);
-				//p.printProgress();
+				// p.printProgress();
 			}
 		}
 		System.out.println("done.");
 	}
-	
-	private int countNonNullCells(){
-		int result =0;
+
+	private int countNonNullCells() {
+		int result = 0;
 		for (int i = 0; i < x_dimension; i++) {
 			for (int j = 0; j < y_dimension; j++) {
-				if(cells[i][j] != null){
+				if (cells[i][j] != null) {
 					result++;
 				}
 			}
-			}
+		}
 		return result;
 	}
 
@@ -115,7 +110,7 @@ public class GameBoard {
 		System.out.println(" done.");
 
 		numberOfCells = countNonNullCells();
-		
+
 		System.out.println("filling with food...");
 		fillWithFood(p);
 		System.out.println("done.");
@@ -143,7 +138,7 @@ public class GameBoard {
 
 				p.increment(1);
 
-				//p.printProgress();
+				// p.printProgress();
 			}
 		}
 	}
@@ -158,11 +153,12 @@ public class GameBoard {
 			int random_x = rand.nextInt(x_dimension);
 			int random_y = rand.nextInt(y_dimension);
 			if (new Position(random_x, random_y).isValid(this)) {
-				cells[random_x][random_y].addFood(new Food(10, cells[random_x][random_y]));
+				cells[random_x][random_y].addFood(new Food(10,
+						cells[random_x][random_y]));
 				toFill--;
 
 				p.increment(1);
-				//p.printProgress();
+				// p.printProgress();
 
 			}
 		}
@@ -172,7 +168,7 @@ public class GameBoard {
 	public void addRobotFromFile(String file) {
 		addRobotFromFile(file, Color.BLACK);
 	}
-	
+
 	public void addRobotFromFile(String file, Color printColor) {
 		Executable code = ScriptCompiler.compile(file);
 		if (code == null) {
@@ -200,15 +196,14 @@ public class GameBoard {
 		bot.setPosition(cells[pos.x][pos.y]);
 	}
 
-	public void printStatus(boolean printBoard, boolean printRobots, boolean printEvents) {
+	public void printStatus(boolean printBoard, boolean printRobots,
+			boolean printEvents) {
 		System.out.println("Age: " + age + "   Bots alive: " + bots.size());
 		if (printBoard) {
 			printBoard();
 			System.out.println();
-			
+
 		}
-		
-		
 
 		if (printRobots) {
 			printRobots();
@@ -229,8 +224,9 @@ public class GameBoard {
 		System.out.println("id | energy | health | age | origin");
 		if (!bots.isEmpty()) {
 			for (Robot bot : bots) {
-				System.out.println(bot.getID() + " | " + bot.getEnergy() + " | " + bot.getHealth() + " | "
-						+ bot.getAge() + " | " + bot.getOrigin());
+				System.out.println(bot.getID() + " | " + bot.getEnergy()
+						+ " | " + bot.getHealth() + " | " + bot.getAge()
+						+ " | " + bot.getOrigin());
 			}
 		} else {
 			System.out.println("no bots on board");
@@ -244,7 +240,9 @@ public class GameBoard {
 			for (int i = 0; i < y_dimension; i++) {
 				if (cells[i][j] != null) {
 					if (cells[i][j].isOccupied()) {
-						System.out.print("[" + cells[i][j].getOccupant().getID().charAt(0) + "] ");
+						System.out.print("["
+								+ cells[i][j].getOccupant().getID().charAt(0)
+								+ "] ");
 					} else if (cells[i][j].hasFood()) {
 						System.out.print("[*] ");
 					} else {
@@ -267,7 +265,8 @@ public class GameBoard {
 			int random_y = rand.nextInt(y_dimension);
 
 			if (cells[random_x][random_y] != null) {
-				if (!cells[random_x][random_y].hasFood() && !cells[random_x][random_y].isOccupied()) {
+				if (!cells[random_x][random_y].hasFood()
+						&& !cells[random_x][random_y].isOccupied()) {
 					done = true;
 					pos = new Position(random_x, random_y);
 				}
@@ -289,13 +288,16 @@ public class GameBoard {
 	}
 
 	private void killBot(Robot bot, String reason) {
-		events.append(bot.getID() + " died because: " + reason + ", he left " + bot.getEnergy() + " Engergy");
+		events.append(bot.getID() + " died because: " + reason + ", he left "
+				+ bot.getEnergy() + " Engergy");
 		events.append(System.getProperty("line.separator"));
 		deadBots.add(bot);
 		if (bot.getEnergy() > 0) {
-			bot.getPosition().addFood(new Food(bot.getEnergy(), bot.getPosition()));
+			bot.getPosition().addFood(
+					new Food(bot.getEnergy(), bot.getPosition()));
 		}
-		highScore.add(new Score(bot.getID(), bot.getOrigin(), bot.getAge(),reason));
+		highScore.add(new Score(bot.getID(), bot.getOrigin(), bot.getAge(),
+				reason));
 	}
 
 	private void moveRobot(Robot bot, int direction, int attack_strength) {
@@ -317,7 +319,8 @@ public class GameBoard {
 					return;
 				}
 
-				int actual_attack = Math.min(bot.getEnergy() - attack_strength, 0);
+				int actual_attack = Math.min(bot.getEnergy() - attack_strength,
+						0);
 				bot.loseEnergy(attack_strength);
 				if (bot.getEnergy() <= 0) {
 					killBot(bot, "Energy <= 0");
@@ -369,15 +372,16 @@ public class GameBoard {
 
 		return bots.size();
 	}
-	
-	public void printHighScoreTopN(int n){
+
+	public void printHighScoreTopN(int n) {
 		n = Math.min(n, highScore.size());
 		Collections.sort(highScore, new ScoreComparator());
 		System.out.println("highscore:");
-		System.out.println("age| id | origin | cause of Death");
-		for(int i=0;i<n;i++){
+		System.out.println("placement | age | id | origin | cause of Death");
+		for (int i = 0; i < n; i++) {
 			Score score = highScore.get(i);
-			System.out.println(score.age + " | " + score.id + " | " + score.origin + " | "+score.causeOfDeath);
+			System.out.println((i+1) + " | " + score.age + " | " + score.id + " | "
+					+ score.origin + " | " + score.causeOfDeath);
 		}
 	}
 
@@ -388,7 +392,8 @@ public class GameBoard {
 	public void printAverageScore() {
 		HashMap<String, AccumulatedScore> acc_score = new HashMap<String, AccumulatedScore>();
 		for (Score score : highScore) {
-			acc_score.put(score.origin, new AccumulatedScore(score.origin, score.age));
+			acc_score.put(score.origin, new AccumulatedScore(score.origin,
+					score.age));
 		}
 		System.out.println("origin | avarage age");
 		for (String key : acc_score.keySet()) {
