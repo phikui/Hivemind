@@ -17,7 +17,7 @@ public class DataPlotter extends ApplicationFrame {
 	 * @param title
 	 *            the frame title.
 	 */
-	public DataPlotter(final String title,String xAxis,String yAxis, XYSeries plotdata) {
+	public DataPlotter(final String title, int width,int height,String xAxis,String yAxis, XYSeries plotdata) {
 
 		super(title);
 		final XYSeriesCollection data = new XYSeriesCollection(plotdata);
@@ -26,7 +26,7 @@ public class DataPlotter extends ApplicationFrame {
 				true, true, false);
 
 		final ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+		chartPanel.setPreferredSize(new java.awt.Dimension(width, height));
 		setContentPane(chartPanel);
 
 	}
@@ -34,8 +34,8 @@ public class DataPlotter extends ApplicationFrame {
 
 	
 	
-	public static void showData(String title,String xAxis,String yAxis,XYSeries data){
-		final DataPlotter frame = new DataPlotter(title,xAxis,yAxis,data);
+	public static void showData(String title,int width,int height,String xAxis,String yAxis,XYSeries data){
+		final DataPlotter frame = new DataPlotter(title,width,height,xAxis,yAxis,data);
 		frame.pack();
 		RefineryUtilities.centerFrameOnScreen(frame);
 		frame.setVisible(true);

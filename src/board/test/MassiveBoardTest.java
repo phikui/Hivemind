@@ -13,19 +13,17 @@ public class MassiveBoardTest {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
-		GameBoard board = new GameBoard(800, 300, 0.1);
-		Renderer renderer = new Renderer(board,2,30);
-		int swarmSize=100;
+		GameBoard board = new GameBoard(400, 150, 0.1);
+		Renderer renderer = new Renderer(board, 4, 30);
+		int swarmSize = 100;
 		String one = "./scripts/random_valid_direction.rs";
 		String two = "./scripts/random_direction.rs";
 		String three = "./scripts/random_foodcheck.rs";
-		
-		
-		board.addMultipleBots(new String[]{one,two,three}, swarmSize);
-	
-		
-		 renderer.start();
-		
+
+		board.addMultipleBots(new String[] { one, two, three }, swarmSize);
+
+		renderer.start();
+
 		while (true) {
 			board.executeRobots();
 			board.printStatus(false, false, false);
@@ -35,14 +33,20 @@ public class MassiveBoardTest {
 			// System.out.println();
 			Thread.sleep(10);
 		}
-		
-		board.printHighScoreTopN(20);
+
+		board.printHighScoreTopN(10);
+		System.out.println();
+		board.printHighscoreLowN(10);
 		System.out.println();
 		System.out.println();
 		board.printAverageScore();
 		renderer.done();
-		DataPlotter.showData("Population", "year","living bots",board.getPopulation());
-		//System.exit(0);
+		DataPlotter.showData("Population", 1600, 600, "year", "living bots",
+				board.getPopulation());
+		renderer.join();
+		board = null;
+		renderer = null;
+		// System.exit(0);
 	}
 
 }
