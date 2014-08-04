@@ -9,7 +9,7 @@ The bots are programmed by a scripting language designed for this game called ro
 * [Wiki](https://bitbucket.org/BlindEyeHalo/hivemind/wiki/Home)
 
 ## requirements ##
-* [apache commons IO](http://commons.apache.org/proper/commons-io/download_io.cgi)
+* [apache commons IO](http://commons.apache.org/proper/commons-io/download_io.cgi) (File input/output)
 * [jfreechart](http://www.jfree.org/jfreechart/) (Data plotting)
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
