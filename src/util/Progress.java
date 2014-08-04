@@ -29,6 +29,11 @@ public class Progress {
 		String message = String.format("Completed %d%%.\n", (int) current);
 		monitor.setNote(message);
 		monitor.setProgress(amount);
+		
+		if(monitor.isCanceled()){
+			System.err.println("Cancelled");
+			System.exit(0);
+		}
 	}
 
 	public void printProgress() {

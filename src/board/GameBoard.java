@@ -69,7 +69,7 @@ public class GameBoard {
 			for (int j = 0; j < swarmSize; j++) {
 				addRobotFromFile(bots[i]);
 				p.increment(1);
-				p.printProgress();
+				//p.printProgress();
 			}
 		}
 		System.out.println("done.");
@@ -119,11 +119,6 @@ public class GameBoard {
 		System.out.println("filling with food...");
 		fillWithFood(p);
 		System.out.println("done.");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-
 	}
 
 	private void generateCanyons(int length, int width, Position start) {
@@ -148,7 +143,7 @@ public class GameBoard {
 
 				p.increment(1);
 
-				p.printProgress();
+				//p.printProgress();
 			}
 		}
 	}
@@ -167,7 +162,7 @@ public class GameBoard {
 				toFill--;
 
 				p.increment(1);
-				p.printProgress();
+				//p.printProgress();
 
 			}
 		}
