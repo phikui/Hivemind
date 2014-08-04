@@ -14,7 +14,7 @@ MOVE_DIRECTION = dir;
 done = FALSE;
 counter = 0;
 LOOP 8 DO
-	dir = (dir + counter) % 9;
+	dir = counter;
 	counter++;
 	done = HAS_FOOD dir;
 	IF done THEN

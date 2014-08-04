@@ -70,7 +70,7 @@ public class Renderer extends Thread {
 			// return;
 			// }
 			if (cell.getOccupant() != null) {
-				g.setColor(Color.BLACK);
+				g.setColor(cell.getOccupant().getPrintColor());
 			} else if (cell.hasFood()) {
 				g.setColor(Color.green);
 			} else {

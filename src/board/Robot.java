@@ -1,5 +1,6 @@
 package board;
 
+import java.awt.Color;
 import java.util.HashMap;
 
 import roboscript.executer.Executable;
@@ -19,6 +20,7 @@ public class Robot {
 	private int health;
 	private Executable code;
 	protected HashMap<String, Expression> variables;
+	private Color printColor;
 
 	private Cell position;
 	private int age;
@@ -145,6 +147,17 @@ public class Robot {
 
 	public String getOrigin() {
 		return origin;
+	}
+
+	public Color getPrintColor() {
+		if(printColor == null){
+			return Color.BLACK;
+		}
+		return printColor;
+	}
+
+	public void setPrintColor(Color printColor) {
+		this.printColor = printColor;
 	}
 
 }

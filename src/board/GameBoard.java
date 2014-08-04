@@ -1,5 +1,6 @@
 package board;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,7 +11,6 @@ import java.util.Set;
 import board.score.AccumulatedScore;
 import board.score.Score;
 import board.score.ScoreComparator;
-
 import roboscript.InputOutput;
 import roboscript.executer.Executable;
 import roboscript.interpreter.exceptions.ExecuteException;
@@ -170,6 +170,10 @@ public class GameBoard {
 	}
 
 	public void addRobotFromFile(String file) {
+		addRobotFromFile(file, Color.BLACK);
+	}
+	
+	public void addRobotFromFile(String file, Color printColor) {
 		Executable code = ScriptCompiler.compile(file);
 		if (code == null) {
 			return;
@@ -177,6 +181,7 @@ public class GameBoard {
 		String[] tokens = file.split("/");
 
 		Robot bot = new Robot(code, tokens[tokens.length - 1]);
+		bot.setPrintColor(printColor);
 		addRobot(bot);
 	}
 
