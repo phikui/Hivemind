@@ -295,7 +295,7 @@ public class GameBoard {
 		if (bot.getEnergy() > 0) {
 			bot.getPosition().addFood(new Food(bot.getEnergy(), bot.getPosition()));
 		}
-		highScore.add(new Score(bot.getID(), bot.getOrigin(), bot.getAge()));
+		highScore.add(new Score(bot.getID(), bot.getOrigin(), bot.getAge(),reason));
 	}
 
 	private void moveRobot(Robot bot, int direction, int attack_strength) {
@@ -374,10 +374,10 @@ public class GameBoard {
 		n = Math.min(n, highScore.size());
 		Collections.sort(highScore, new ScoreComparator());
 		System.out.println("highscore:");
-		System.out.println("age| id | origin");
+		System.out.println("age| id | origin | cause of Death");
 		for(int i=0;i<n;i++){
 			Score score = highScore.get(i);
-			System.out.println(score.age + " | " + score.id + " | " + score.origin);
+			System.out.println(score.age + " | " + score.id + " | " + score.origin + " | "+score.causeOfDeath);
 		}
 	}
 
