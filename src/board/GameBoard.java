@@ -64,7 +64,7 @@ public class GameBoard {
 	
 	public void addMultipleBots(String[] bots, int swarmSize) {
 		System.out.println("adding bots: ");
-		Progress p = new Progress(bots.length * swarmSize, 5);
+		Progress p = new Progress(bots.length * swarmSize, "Adding Bots");
 		for (int i = 0; i < bots.length; i++) {
 			for (int j = 0; j < swarmSize; j++) {
 				addRobotFromFile(bots[i]);
@@ -139,7 +139,7 @@ public class GameBoard {
 
 	private void initCells() {
 		int total = x_dimension * y_dimension;
-		Progress p = new Progress(total, 5);
+		Progress p = new Progress(total, "Creating Cells");
 
 		for (int i = 0; i < x_dimension; i++) {
 			for (int j = 0; j < y_dimension; j++) {
@@ -156,7 +156,7 @@ public class GameBoard {
 	// fill percentage many cells with food
 	private void fillWithFood(double percentage) {
 		int toFill = (int) Math.floor(numberOfCells * percentage);
-		Progress p = new Progress(toFill, 5);
+		Progress p = new Progress(toFill, "Creating Food");
 
 		while (toFill > 0) {
 

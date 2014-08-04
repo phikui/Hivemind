@@ -115,6 +115,7 @@ public class Renderer extends Thread {
 			}
 
 		}
+		frame.setVisible(false);
 	}
 
 	public void done() {

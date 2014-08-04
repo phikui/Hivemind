@@ -12,9 +12,9 @@ public class MassiveBoardTest {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
-		GameBoard board = new GameBoard(1000, 350, 0.05);
-		Renderer renderer = new Renderer(board,2,-1);
-		int swarmSize=1000;
+		GameBoard board = new GameBoard(1000, 380, 0.3);
+		Renderer renderer = new Renderer(board,2,30);
+		int swarmSize=5000;
 		String one = "./scripts/random_valid_direction.rs";
 		String two = "./scripts/random_direction.rs";
 		String three = "./scripts/random_foodcheck.rs";
