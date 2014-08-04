@@ -10,6 +10,7 @@ The bots are programmed by a scripting language designed for this game called ro
 
 ## requirements ##
 * [apache commons IO](http://commons.apache.org/proper/commons-io/download_io.cgi)
+* [jfreechart](http://www.jfree.org/jfreechart/) (Data plotting)
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 
