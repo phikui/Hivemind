@@ -6,7 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
+import org.jfree.data.xy.XYSeries;
 
 import board.score.AccumulatedScore;
 import board.score.Score;
@@ -22,12 +23,14 @@ public class GameBoard {
 	protected Cell[][] cells;
 	private int numberOfCells, x_dimension, y_dimension;
 
+	@SuppressWarnings("unused")
 	private static final double runtimeModifier = 1;
 	private List<Robot> bots, deadBots;
 	private Random rand;
 	private StringBuffer events;
 	private List<Score> highScore;
 	private int age;
+	private XYSeries population;
 
 	public int getNumberOfCells() {
 		return numberOfCells;
@@ -91,6 +94,7 @@ public class GameBoard {
 		numberOfCells = m * n;
 		x_dimension = m;
 		y_dimension = n;
+		population = new XYSeries("Living Bots");
 
 		events = new StringBuffer();
 		bots = new ArrayList<Robot>();
@@ -278,13 +282,17 @@ public class GameBoard {
 	}
 
 	public void executeRobots() {
-
+		population.add(bots.size(), age);
 		for (Robot bot : bots) {
 			bot.setVariables(this);
 			executeRobot(bot);
 		}
 		cleanDeadRobots();
 		age++;
+	}
+
+	public XYSeries getPopulation() {
+		return population;
 	}
 
 	private void killBot(Robot bot, String reason) {
@@ -342,6 +350,7 @@ public class GameBoard {
 	}
 
 	private void executeRobot(Robot bot) {
+		@SuppressWarnings("unused")
 		long executeTime = 0;
 
 		try {
