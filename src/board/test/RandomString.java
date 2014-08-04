@@ -5,7 +5,6 @@ import java.security.SecureRandom;
 
 import util.IntervalSampler;
 
-
 public class RandomString {
 
 	/**
@@ -16,10 +15,10 @@ public class RandomString {
 		SecureRandom random = new SecureRandom();
 		System.out.println(new BigInteger(50, random).toString(32));
 		String interval = "[0,2)";
-		while (true){
+		while (true) {
 			System.out.println(IntervalSampler.sampleDouble(interval));
 		}
-		
+
 	}
 
 }

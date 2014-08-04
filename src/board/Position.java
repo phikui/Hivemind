@@ -5,7 +5,6 @@ import java.util.List;
 
 import util.IntervalSampler;
 
-
 public class Position {
 	public int x, y;
 	protected static int max_x, max_y;
@@ -104,15 +103,16 @@ public class Position {
 		List<Position> path = new ArrayList<Position>();
 		Position pos = this;
 		path.add(pos);
-		
+
 		for (int i = 0; i < length; i++) {
 			int tries = 0;
 			int d = IntervalSampler.sampleInteger("[0,8]");
-			while ((!pos.move(d).isValid(board)) || containsPosition(path, pos.move(d))) {
+			while ((!pos.move(d).isValid(board))
+					|| containsPosition(path, pos.move(d))) {
 				d = IntervalSampler.sampleInteger("[0,8]");
 				tries++;
-				
-				if(tries>1000){
+
+				if (tries > 1000) {
 					break;
 				}
 			}

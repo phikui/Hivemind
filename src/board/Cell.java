@@ -59,8 +59,8 @@ public class Cell {
 	public boolean needsRepaint() {
 		return needsRepaint;
 	}
-	
-	public void wasPainted(){
+
+	public void wasPainted() {
 		needsRepaint = false;
 	}
 }

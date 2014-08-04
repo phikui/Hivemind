@@ -20,14 +20,15 @@ public class Renderer extends Thread {
 	public Renderer(GameBoard board, int scaling, int framesPerSecond) {
 		this.board = board;
 		this.scaling = scaling;
-		if(framesPerSecond < 0){ //interpret as undbounded fps
+		if (framesPerSecond < 0) { // interpret as undbounded fps
 			ups = 300;
 		} else {
-		ups = framesPerSecond;
+			ups = framesPerSecond;
 		}
-		
+
 		frame = new JFrame();
-		frame.setBounds(0, 0, board.getX_dimension() * scaling, board.getY_dimension() * scaling);
+		frame.setBounds(0, 0, board.getX_dimension() * scaling,
+				board.getY_dimension() * scaling);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(Color.WHITE);
 		frame.setResizable(false);
@@ -87,42 +88,42 @@ public class Renderer extends Thread {
 	public void run() {
 		done = false;
 		long lastupdate = 0;
-		long now=0;
+		long now = 0;
 		long timer = 1;
-		long secondTimer = System.currentTimeMillis(); //to check if whole second has passed
+		long secondTimer = System.currentTimeMillis(); // to check if whole
+														// second has passed
 		int frameCounter = 0;
-		
+
 		while (!done) {
 			frame.setTitle("Age: " + board.getAge() + "    fps: " + real_ups);
 			now = System.currentTimeMillis();
 			timer = now - lastupdate; // How many milliseconds have passed since
 										// last update
 			if (timer >= (1000 / ups)) { // if at least 1000/frequency ms have
-										// passed
+											// passed
 				// System.out.println("update!");
 				paintBoard();
 				frameCounter++;
-				
-				
-				frame.setTitle("Age: " + board.getAge() + "    fps: " + real_ups);
-				
+
+				frame.setTitle("Age: " + board.getAge() + "    fps: "
+						+ real_ups);
+
 				lastupdate = System.currentTimeMillis();
 			} else {
 				try {
-					Thread.sleep((1000 / ups)-timer);
+					Thread.sleep((1000 / ups) - timer);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			
-			//calculate real fps:
-			if(System.currentTimeMillis()>secondTimer+1000){
+
+			// calculate real fps:
+			if (System.currentTimeMillis() > secondTimer + 1000) {
 				real_ups = frameCounter;
 				frameCounter = 0;
 				secondTimer = System.currentTimeMillis();
 			}
-			
 
 		}
 		frame.setVisible(false);

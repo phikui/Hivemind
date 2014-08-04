@@ -389,12 +389,12 @@ public class GameBoard {
 		System.out.println("placement | age | id | origin | cause of Death");
 		for (int i = 0; i < n; i++) {
 			Score score = highScore.get(i);
-			System.out.println((i+1) + " | " + score.age + " | " + score.id + " | "
-					+ score.origin + " | " + score.causeOfDeath);
+			System.out.println((i + 1) + " | " + score.age + " | " + score.id
+					+ " | " + score.origin + " | " + score.causeOfDeath);
 		}
 	}
-	
-	public void printHighscoreLowN(int n){
+
+	public void printHighscoreLowN(int n) {
 		n = Math.min(n, highScore.size());
 		Collections.sort(highScore, new ScoreComparator());
 		Collections.reverse(highScore);
@@ -402,8 +402,9 @@ public class GameBoard {
 		System.out.println("placement | age | id | origin | cause of Death");
 		for (int i = 0; i < n; i++) {
 			Score score = highScore.get(i);
-			System.out.println((highScore.size()-i) + " | " + score.age + " | " + score.id + " | "
-					+ score.origin + " | " + score.causeOfDeath);
+			System.out.println((highScore.size() - i) + " | " + score.age
+					+ " | " + score.id + " | " + score.origin + " | "
+					+ score.causeOfDeath);
 		}
 	}
 

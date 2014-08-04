@@ -61,7 +61,6 @@ public class Robot {
 				value = 0;
 			}
 			variables.put("IS_VALID_" + name, new Number(value));
-			
 
 			// variables for is occupied
 			if ((newCell != null) && newCell.isOccupied()) {
@@ -70,7 +69,6 @@ public class Robot {
 				value = 0;
 			}
 			variables.put("IS_OCCUPIED_" + name, new Number(value));
-			
 
 			if ((newCell != null) && newCell.hasFood()) {
 				value = 1;
@@ -81,7 +79,7 @@ public class Robot {
 			variables.put("HAS_FOOD_" + name, new Number(value));
 
 		}
-		
+
 	}
 
 	public Robot(Executable code, String id) {
@@ -115,10 +113,8 @@ public class Robot {
 	}
 
 	public long execute() throws ExecuteException {
-		
-		
+
 		long runtime = code.execute(variables);
-		
 
 		return runtime;
 	}
@@ -150,7 +146,7 @@ public class Robot {
 	}
 
 	public Color getPrintColor() {
-		if(printColor == null){
+		if (printColor == null) {
 			return Color.BLACK;
 		}
 		return printColor;

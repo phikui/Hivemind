@@ -15,14 +15,15 @@ public class BoardTest {
 		// TODO Auto-generated method stub
 		GameBoard board = new GameBoard(40, 40, 0.3);
 		board.printStatus(false, false, true);
-		board.addRobotFromFile("./scripts/test3.rs",Color.MAGENTA);
-		 board.addRobotFromFile("./scripts/random_valid_direction.rs");
-		 board.addRobotFromFile("./scripts/random_foodcheck.rs",Color.BLUE);
-		 board.addRobotFromFile("./scripts/random_direction.rs",Color.GRAY);
-		//board.addMultipleBots(new String[] { "./scripts/random_foodcheck.rs", "./scripts/test2.rs" }, 5);
+		board.addRobotFromFile("./scripts/test3.rs", Color.MAGENTA);
+		board.addRobotFromFile("./scripts/random_valid_direction.rs");
+		board.addRobotFromFile("./scripts/random_foodcheck.rs", Color.BLUE);
+		board.addRobotFromFile("./scripts/random_direction.rs", Color.GRAY);
+		// board.addMultipleBots(new String[] { "./scripts/random_foodcheck.rs",
+		// "./scripts/test2.rs" }, 5);
 
-		 Renderer renderer = new Renderer(board,15,30);
-		 renderer.start();
+		Renderer renderer = new Renderer(board, 15, 30);
+		renderer.start();
 		board.printStatus(false, true, true);
 
 		while (true) {
@@ -34,7 +35,7 @@ public class BoardTest {
 				break;
 			}
 		}
-		
+
 		board.printHighScoreTopN(20);
 		System.out.println();
 		System.out.println();

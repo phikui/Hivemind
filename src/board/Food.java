@@ -7,7 +7,7 @@ public class Food {
 	protected void increaseAmount(int amount) {
 		this.amount += amount;
 	}
-	
+
 	public Food(int amount, Cell place) {
 		this.amount = amount;
 		this.place = place;
