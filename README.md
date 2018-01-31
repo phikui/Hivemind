@@ -13,11 +13,3 @@ The bots are programmed by a scripting language designed for this game called ro
 * [jfreechart](http://www.jfree.org/jfreechart/) (Data plotting)
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-
-## Contribution guidelines ##
-
-* coming
-
-## Who do I talk to? ##
-
-* blindeyehalo1@gmail.com
